@@ -1,0 +1,1 @@
+const tailWind = {"colors":["transparent","current","black","white","slate","gray","zinc","neutral","stone","red","orange","amber","yellow","lime","green","emerald","teal","cyan","sky","blue","indigo","violet","purple","fuchia","pink","rose","success","fail","cancel","army-black","army-gold","army-white","gold","light-camo","dark-camo"]}
