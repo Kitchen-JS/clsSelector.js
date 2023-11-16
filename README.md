@@ -5,4 +5,4 @@ Simple JS Selector Class that is populated with json data
 npm install -D tailwindcss
 
 ## Run
-npx tailwindcss -i ./src/input.css -o ./content/css/clsSelector.css --watch
+npx tailwindcss -i ./src/input.css -o ./content/css/clsSelector-temp.css --watch
