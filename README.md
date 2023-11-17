@@ -1,7 +1,20 @@
 # clsSelector
 Simple JS Selector Class that is populated with json data
 
-## Setup
+
+## Usage
+Download the latest release
+```
+let selector = new clsSelector(
+{
+    containerElement: document.querySelector('.mySelector')
+});
+```
+
+
+## Development
+
+### Setup
 - npm i -g tailwindcss
 - npm install
 - npm update
@@ -11,7 +24,7 @@ Use latest PEC theme www folder https://github.com/PEC-Development-Team/T3-Tailw
 - www
 - tailwind.config.js
 
-## Run
+### Run
 1st Terminal
 ```
 npx tailwindcss -i ./tailwindInput/input.css -o ./www/content/css/clsSelector-temp.css --watch
@@ -21,5 +34,5 @@ npx tailwindcss -i ./tailwindInput/input.css -o ./www/content/css/clsSelector-te
 node serve
 ```
 
-## Build
+### Build
 node build
