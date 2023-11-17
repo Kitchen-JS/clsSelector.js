@@ -1,0 +1,33 @@
+/**************************************
+clsSelector: v3.0.0
+PEC T3-Tailwind-Theme Latest Version
+TailWind: v^3.3.5
+**************************************/
+
+.dark .clsSelector
+{
+  display: block;
+  border-collapse: collapse;
+  --tw-bg-opacity: 1;
+  background-color: rgb(127 29 29 / var(--tw-bg-opacity))
+}
+
+.lite .clsSelector
+{
+}
+
+.clsSelector
+{
+  display: block;
+  height: 2rem;
+  width: 100%;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
+}
+
+.clsSelector .input-group
+{
+}

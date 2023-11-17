@@ -1,6 +1,6 @@
 .dark .clsSelector
 {
-
+    @apply block border-collapse bg-red-900
 }
 
 .lite .clsSelector

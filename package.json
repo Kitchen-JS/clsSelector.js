@@ -3,8 +3,8 @@
   "description": "A JavaScript Selector that handles json data",
   "version": "v3.0.0",
   "scripts": {
-    "build": "tailwindcss -i ./tailwindInput/input.css -o ./www/content/css/tailwindTheme.css && node tailwindBuildJS.js",
-    "build-css": "tailwindcss -i ./tailwindInput/input.css -o ./www/content/css/tailwindTheme.css --watch"
+    "build": "tailwindcss -i ./tailwindInput/clsSelector.css -o ./www/content/css/clsSelector.css && node build.js",
+    "build-run": "tailwindcss -i ./tailwindInput/clsSelector.css -o ./www/content/css/clsSelector.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.5"
