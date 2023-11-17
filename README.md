@@ -2,7 +2,8 @@
 Simple JS Selector Class that is populated with json data
 
 ## Setup
-npm install -D tailwindcss
+Use PEC theme https://github.com/PEC-Development-Team/T3-Tailwind-Theme
+
 
 ## Run
-npx tailwindcss -i ./src/input.css -o ./content/css/clsSelector-temp.css --watch
+npx tailwindcss -i ./src/input.css -o ./www/content/css/clsSelector-temp.css --watch
