@@ -50,7 +50,7 @@ class clsSelector extends clsBaseClass
         this.containerElement.classList.add('clsSelector');        
 
         this.containerElement.innerHTML = `
-            <div class="input-group">
+            <div class="main-input input-group">
                 <input class="selector-input peer" type="text" role="listbox" data-bs-toggle="dropdown" data-bs-target="#${id}" aria-expanded="false" aria-controls="menu" placeholder="Select an option . . . " />
                 <label for="selector-input" class="selector-heading input-label">Select an option . . . </label>
                 <button aria-label="selector-refresh-button" role="button" class="selector-button btn btn-light refresh-button">
@@ -60,11 +60,11 @@ class clsSelector extends clsBaseClass
                     &#x2715;
                 </button>                       
             </div>
-            <menu id="${id}" role="dropdown" class="min-w-full min-h-full menu hidden border-0">
-                <div class="relative">
-                    <div class="absolute top-2 ring-2 ring-gold min-w-full rounded-md overflow-hidden z-9000">
-                        <option disabled class="min-w-full no-results p-2 bg-white z-9000">No Results . . .</option>
-                        <ul class="min-w-full max-h-96 focus:outline-none overflow-auto z-9000">
+            <menu id="${id}" role="dropdown" class="selector-dropdown menu hidden">
+                <div class="dropdown-main-container">
+                    <div class="dropdown-inner-container">
+                        <option disabled class="no-results">No Results . . .</option>
+                        <ul class="">
                             <li>Blah</li>
                             <li>Fubar</li>
                             <li>Blah</li>
@@ -79,20 +79,23 @@ class clsSelector extends clsBaseClass
 
         this.containerElement.querySelector('.cancel-button').addEventListener('click', () =>
         {
+            console.log('cancel');
             this.cancelBtn();
         });
 
         this.containerElement.querySelector('.refresh-button').addEventListener('click', () =>
         {
+            console.log('refresh');
             this.refreshBtn();
         });
 
         this.selectorInput = this.containerElement.querySelector('.selector-input');
 
-        this.selectorMenu = this.containerElement.querySelector('.menu');
+        this.selectorMenu = this.containerElement.querySelector('.selector-dropdown');
 
         this.selectorInput.addEventListener('click', () =>
         {
+            console.log('selectorInput');
             this.selectorMenu.classList.remove('hidden');
 
             // if (!this.once || !this._value)
@@ -129,7 +132,6 @@ class clsSelector extends clsBaseClass
         });
 
         this.isListEmpty();
-
     }
 
     cancelBtn()
