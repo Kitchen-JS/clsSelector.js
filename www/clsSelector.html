@@ -4,7 +4,7 @@
     <meta charset = "UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>T3 Tailwind Theme</title>
+    <title>clsSelector</title>
 
     <meta name="language" content="EN">
 
@@ -19,14 +19,29 @@
     <script src="/content/js/clsSelector.js"></script>
   </head>
   <body>
-    <div class="@container" style="width: calc(50vw);">
-      <div class="mySelector"></div>  
+    <div class="@container container">
+      <div class="flex-form">
+          <div class="mySelector"></div>
+        <div class="input-group">
+          <button class="val button btn">Get Value</button>
+        </div>
+      </div>
     </div>
     
     <script>
         let selector = new clsSelector(
         {
             containerElement: document.querySelector('.mySelector')
+        });
+
+        selector.addItem('value1', 'textValue1', 'listValue1');
+        selector.addItem('value2', 'textValue2', 'listValue2');
+        selector.addItem('value3', 'textValue3', 'listValue3');
+
+
+        document.querySelector('.val').addEventListener('click', () =>
+        {
+          console.log(selector.value())
         });
     </script>
   </body>
