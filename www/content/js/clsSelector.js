@@ -6,14 +6,14 @@ class clsSelector extends clsBaseClass
 
         if (typeof options === 'undefined')
         {
-            console.error('options must be defined - clsSelector');
+            console.error('clsSelector: options must be defined');
         }
 
         this.options = options;
 
         if (typeof this.options.containerElement === 'undefined')
         {
-            console.error('containerElement must be defined - clsSelector');
+            console.error('clsSelector: containerElement must be defined');
         }
 
         if (typeof this.options.placeHolder !== 'undefined')
@@ -24,6 +24,21 @@ class clsSelector extends clsBaseClass
         if (typeof this.options.placeholder === 'undefined')
         {
             this.options.placeholder = 'Type to Search';
+        }
+
+        if(typeof this.options.liveSearch === 'undefined')
+        {
+            this.options.liveSearch = null;
+        }
+
+        if(typeof this.options.refresh === 'undefined')
+        {
+            this.options.refresh = null;
+        }
+
+        if(this.options.refresh && this.options.liveSearch)
+        {
+            console.error('clsSelector: can not have both refresh and liveSearch options');
         }
 
         this.options.minSearchLen = 3;
@@ -65,6 +80,12 @@ class clsSelector extends clsBaseClass
                 </div>
             </menu>
         `;
+
+        // If not live search and no refresh method not provided refresh not needed
+        if(!this.options.liveSearch && !this.options.refresh)
+        {
+            this.containerElement.querySelector('.refresh-button').classList.add('hidden');
+        }
 
         this.containerElement.querySelector('.cancel-button').addEventListener('click', () =>
         {

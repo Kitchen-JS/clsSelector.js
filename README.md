@@ -10,6 +10,13 @@ let selector = new clsSelector(
 });
 ```
 
+### Options
+- refresh - method provided to get a list of possible results used in a static fashion. The refresh button can be pushed to update/repopulate list.
+- liveSearch - method provided to search an API given a search term
+
+### Usage notes
+- Does not work inside an input-group but does work well within a flex-form
+
 ## Development
 
 ### Setup

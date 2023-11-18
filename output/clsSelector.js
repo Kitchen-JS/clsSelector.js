@@ -11,14 +11,14 @@ class clsSelector extends clsBaseClass
 
         if (typeof options === 'undefined')
         {
-            console.error('options must be defined - clsSelector');
+            console.error('clsSelector: options must be defined');
         }
 
         this.options = options;
 
         if (typeof this.options.containerElement === 'undefined')
         {
-            console.error('containerElement must be defined - clsSelector');
+            console.error('clsSelector: containerElement must be defined');
         }
 
         if (typeof this.options.placeHolder !== 'undefined')
@@ -31,7 +31,22 @@ class clsSelector extends clsBaseClass
             this.options.placeholder = 'Type to Search';
         }
 
-        this.options.minSearchLen = 0;
+        if(typeof this.options.liveSearch === 'undefined')
+        {
+            this.options.liveSearch = null;
+        }
+
+        if(typeof this.options.refresh === 'undefined')
+        {
+            this.options.refresh = null;
+        }
+
+        if(this.options.refresh && this.options.liveSearch)
+        {
+            console.error('clsSelector: can not have both refresh and liveSearch options');
+        }
+
+        this.options.minSearchLen = 3;
 
         this.containerElement = this.options.containerElement;
 
@@ -65,27 +80,25 @@ class clsSelector extends clsBaseClass
                     <div class="dropdown-inner-container">
                         <option disabled class="no-results">No Results . . .</option>
                         <ul class="">
-                            <li>Blah</li>
-                            <li>Fubar</li>
-                            <li>Blah</li>
-                            <li>Fubar</li>
-                            <li>Blah</li>
-                            <li>Fubar</li>
                         </ul>
                     </div>
                 </div>
             </menu>
         `;
 
+        // If not live search and no refresh method not provided refresh not needed
+        if(!this.options.liveSearch && !this.options.refresh)
+        {
+            this.containerElement.querySelector('.refresh-button').classList.add('hidden');
+        }
+
         this.containerElement.querySelector('.cancel-button').addEventListener('click', () =>
         {
-            console.log('cancel');
             this.cancelBtn();
         });
 
         this.containerElement.querySelector('.refresh-button').addEventListener('click', () =>
         {
-            console.log('refresh');
             this.refreshBtn();
         });
 
@@ -95,7 +108,6 @@ class clsSelector extends clsBaseClass
 
         this.selectorInput.addEventListener('click', () =>
         {
-            console.log('selectorInput');
             this.selectorMenu.classList.remove('hidden');
 
             // if (!this.once || !this._value)
@@ -137,6 +149,7 @@ class clsSelector extends clsBaseClass
     cancelBtn()
     {
         this.selectorInput.value = '';
+        this.deselectItems();
     }
 
     refreshBtn()
@@ -146,28 +159,79 @@ class clsSelector extends clsBaseClass
 
     isListEmpty()
     {
-        let numResults = this.selectorMenu.querySelectorAll('li:not(.hidden)').length;
+        let numResults = Array.from(this.selectorMenu.querySelectorAll('li:not(.hidden)')).length;
 
-        //this.options.universalSearch &&
+        console.log(numResults)
+
         if (!(this.selectorInput.value != null && this.selectorInput.value.length >= this.options.minSearchLen) && numResults <= 0)
         {
             this.selectorMenu.querySelector('.no-results').classList.remove('hidden');
-            this.selectorMenu.querySelector('.no-results').innerHTML = 'Type to search . . .';
+            this.selectorMenu.querySelector('.no-results').innerHTML = 'No results . . .';
 
             console.log(1)
         }
-        else if (numResults >= 0)
+        else if (numResults > 0)
         {
-            this.selectorMenu.querySelector('.no-results').classList.remove('hidden');
-            this.selectorMenu.querySelector('.no-results').innerHTML = 'No results . . .';
+            this.selectorMenu.querySelector('.no-results').classList.add('hidden');
+            this.selectorMenu.querySelector('.no-results').innerHTML = 'Type to search . . .';
 
             console.log(2)
         }
         else
         {
-            this.selectorMenu.querySelector('.no-results').classList.add('hidden');
+            this.selectorMenu.querySelector('.no-results').classList.remove('hidden');
+            this.selectorMenu.querySelector('.no-results').innerHTML = '';
 
             console.log(3)
         }
+    }
+
+    addItem(value, textValue, listValue)
+    {
+        let li = document.createElement('li');
+        li.setAttribute('value', value);
+        li.innerHTML = listValue;
+        li.setAttribute('textValue', textValue);
+
+        li.addEventListener('click', () =>
+        {
+            console.log(li, li.getAttribute('value'));
+
+            this.selectorInput.value = li.getAttribute('textValue');
+
+            this.deselectItems();
+
+            li.setAttribute('selected', true);
+        });
+
+        this.containerElement.querySelector('ul').appendChild(li);
+    }
+
+    deselectItems()
+    {
+        Array.from(this.containerElement.querySelector('ul').querySelectorAll('li')).forEach((li) =>
+        {
+            li.setAttribute('selected', false);
+        });
+    }
+
+    clearItems()
+    {
+        this.deselectItems();
+        this.containerElement.querySelector('ul').innerHTML = '';
+    }
+
+    value()
+    {
+        let val = null;
+        Array.from(this.containerElement.querySelector('ul').querySelectorAll('li')).filter((li) =>
+        {
+            if(li.getAttribute('selected') === 'true')
+            {
+                val = li.getAttribute('value');
+            }
+        });
+
+        return val;
     }
 }

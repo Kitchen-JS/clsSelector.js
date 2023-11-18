@@ -20,18 +20,52 @@
   </head>
   <body>
     <div class="@container container">
+      
+      
+        
       <div class="flex-form">
-          <div class="mySelector"></div>
-        <div class="input-group">
-          <button class="val button btn">Get Value</button>
-        </div>
+        <div class="mySelector"></div>
+
+        <button class="val button btn">Get Value</button>
+        
       </div>
     </div>
     
     <script>
+        // let selector = new clsSelector(
+        // {
+        //     containerElement: document.querySelector('.mySelector')
+        // });
+
+        // let selector = new clsSelector(
+        // {
+        //     containerElement: document.querySelector('.mySelector'),
+        //     liveSearch: (term) =>
+        //     {
+        //       return [];
+        //     },
+        //     refresh: () =>
+        //     {
+
+        //     }
+        // });
+
+        // let selector = new clsSelector(
+        // {
+        //     containerElement: document.querySelector('.mySelector'),
+        //     liveSearch: (term) =>
+        //     {
+        //       return [];
+        //     }
+        // });
+
         let selector = new clsSelector(
         {
-            containerElement: document.querySelector('.mySelector')
+            containerElement: document.querySelector('.mySelector'),
+            refresh: () =>
+            {
+
+            }
         });
 
         selector.addItem('value1', 'textValue1', 'listValue1');

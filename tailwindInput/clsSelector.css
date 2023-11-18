@@ -6,9 +6,21 @@
 {
 } */
 
+/* Theme form integration */
+.input-group .clsSelector
+{
+    @apply w-full h-full;
+}
+
 .clsSelector
 {
-    @apply block w-full h-8 border py-1;
+    @apply w-full border;
+    /* h-8  */
+}
+
+.clsSelector .selector-input
+{
+    
 }
 
 .clsSelector .selector-button
@@ -23,12 +35,13 @@
 
 .clsSelector .dropdown-main-container
 {
-    @apply relative;
+    @apply relative block h-auto;
 }
 
 .clsSelector .dropdown-inner-container
 {
-    @apply absolute top-2 ring-2 ring-gold min-w-full rounded-md overflow-hidden z-9000;
+    @apply top-2 ring-2 ring-gold rounded-md;
+    @apply absolute min-w-full overflow-hidden z-9000;
 }
 
 .clsSelector option.no-results
@@ -38,5 +51,5 @@
 
 .clsSelector ul
 {
-    @apply min-w-full max-h-96 focus:outline-none overflow-auto z-9000;
+    @apply min-w-full max-h-96 focus:outline-none overflow-auto z-9999;
 }
