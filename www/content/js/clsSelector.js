@@ -30,6 +30,10 @@ class clsSelector extends clsBaseClass
         {
             this.options.liveSearch = null;
         }
+        else
+        {
+            console.error('clsSelector - liveSearch: not implemented yet');
+        }
 
         if(typeof this.options.refresh === 'undefined')
         {

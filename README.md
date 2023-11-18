@@ -1,6 +1,10 @@
 # clsSelector
 Simple JS Selector Class that is populated with json data
 
+## Screenshots
+![Collapsed](./screenshots/ss1.png)
+![Expanded](./screenshots/ss2.png)
+
 ## Usage
 Download the latest release from the release section
 
