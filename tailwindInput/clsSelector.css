@@ -53,3 +53,8 @@
 {
     @apply min-w-full max-h-96 focus:outline-none overflow-auto z-9999;
 }
+
+.clsSelector ul li
+{
+    @apply whitespace-pre-line;
+}

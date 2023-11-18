@@ -87,3 +87,8 @@ TailWind: v^3.3.5
   outline: 2px solid transparent;
   outline-offset: 2px
 }
+
+.clsSelector ul li
+{
+  white-space: pre-line
+}
