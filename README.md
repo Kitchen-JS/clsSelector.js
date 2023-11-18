@@ -45,8 +45,20 @@ Download the latest release from the release section
 #### Preferred
 ```
 selector.addItems([object array], [key array in order of value, textValue, listValue])
+
 or
+
 selector.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}], ['id','name','email'])
+
+or 
+fetch('/content/js/selectorData.json')
+.then((res) =>
+{
+    res.json().then((result) =>
+    {
+        selector.addItems(result, ['id','name', 'email']);
+    });
+});
 ```
 #### Fallback
 ```
@@ -56,6 +68,39 @@ selector.addItems([['one',1,'one@sample.com'], ['two',2,'two@sample.com'], ['thr
 - Assumes a pattern of ```value, textValue, listValue```
 - Then defaults to ```value, textValue``` or ```value, textValue, textValue```
 - Finally ```value``` or ```value, value, value```
+
+### Stacked Mapping of Display Value
+```
+selector.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}], ['id','name',['name','phone','email']])
+```
+or
+```
+    let selector = new clsSelector(
+    {
+        containerElement: document.querySelector('.mySelector'),
+        refresh: () =>
+        {
+            return fetch('/content/js/selectorData.json')
+            .then((res) =>
+            {
+            //name, id, phone, email
+            return {jsonData: res.json(), keysArr: ['id','name', ['name','phone','email']] };
+            });
+        }
+    });
+```
+or
+```
+    fetch('/content/js/selectorData.json')
+    .then((res) =>
+    {
+        res.json().then((result) =>
+        {
+        //Stacked mapping
+        selector.addItems(result, ['id','name', ['name','phone','email']]);
+        });
+    });
+```
 
 ## Development
 

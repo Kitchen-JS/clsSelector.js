@@ -301,7 +301,7 @@ class clsSelector extends clsBaseClass
                 return;
             }
 
-            if(typeof jsonData[0][keysArr[0]] === 'undefined' || typeof jsonData[0][keysArr[1]] === 'undefined' || typeof jsonData[0][keysArr[2]] === 'undefined')
+            if(typeof jsonData[0][keysArr[0]] === 'undefined' || typeof jsonData[0][keysArr[1]] === 'undefined' || (typeof [keysArr[2]] !== 'object' && typeof jsonData[0][keysArr[2]] === 'undefined' ))
             {
                 console.error('clsSelector - addItems: key array not valid');
                 return;
@@ -310,13 +310,33 @@ class clsSelector extends clsBaseClass
             {
                 jsonData.forEach((item) =>
                 {
-                    if(typeof item[keysArr[2]] === 'object' && Array.isArray(item[keysArr[2]]))
+                    if(typeof keysArr[2] === 'object' && Array.isArray(keysArr[2]))
                     {
                         //Handle stacked mapping of display value
 
-                        console.warn('clsSelector - addItems: stacked mapping of display value not implemented');
+                        let displayValue = ``;
+                        let fieldCtr = 0;
+                        keysArr[2].forEach((field) =>
+                        {
+                            if(fieldCtr === 0)
+                            {
+                                displayValue = `${item[field]}
+                                `;
+                            }
+                            else if(fieldCtr < keysArr[2].length)
+                            {
+                                displayValue += `${item[field]}
+                                `;
+                            }
+                            else
+                            {
+                                displayValue += `${item[field]}`
+                            }
 
-                        //this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+                            fieldCtr++;
+                        });
+
+                        this.addItem(item[keysArr[0]], item[keysArr[1]], displayValue);
                     }
                     else
                     {
