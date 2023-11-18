@@ -32,6 +32,10 @@
     </div>
     
     <script>
+        let sampleDataSimple = ['one', 'two', 'three'];
+        let sampleDataObject = [{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}];
+        let sampleDataObjectArrOfArr = [['one',1,'one@sample.com'], ['two',2,'two@sample.com'], ['three',3,'three@sample.com']];
+
         // let selector = new clsSelector(
         // {
         //     containerElement: document.querySelector('.mySelector')
@@ -68,10 +72,20 @@
             }
         });
 
-        selector.addItem('value1', 'textValue1', 'listValue1');
-        selector.addItem('value2', 'textValue2', 'listValue2');
-        selector.addItem('value3', 'textValue3', 'listValue3');
+        // selector.addItem('value1', 'textValue1', 'listValue1');
+        // selector.addItem('value2', 'textValue2', 'listValue2');
+        // selector.addItem('value3', 'textValue3', 'listValue3');
 
+        //selector.addItems(sampleDataSimple);
+        //selector.addItems([]); //Empty
+        //selector.addItems({}); //Object instead of array
+        //selector.addItems(); //Nothing
+        //selector.addItems(sampleDataObject);
+        //selector.addItems(sampleDataObject, []);
+        //selector.addItems(sampleDataObjectArrOfArr);
+
+        //[{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}];
+        selector.addItems(sampleDataObject, ['id','name','email']);
 
         document.querySelector('.val').addEventListener('click', () =>
         {

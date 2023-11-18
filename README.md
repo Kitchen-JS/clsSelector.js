@@ -2,7 +2,7 @@
 Simple JS Selector Class that is populated with json data
 
 ## Usage
-Download the latest release
+Download the latest release from the release section
 ```
 let selector = new clsSelector(
 {
@@ -16,6 +16,28 @@ let selector = new clsSelector(
 
 ### Usage notes
 - Does not work inside an input-group but does work well within a flex-form
+
+### Add single items to selector
+```selector.addItem('value1', 'textValue1', 'listValue1');```
+
+### Add simple array of items
+```selector.addItems(['one', 'two', 'three']);```
+
+### Arrays of data
+#### Preferred
+```
+selector.addItems([object array], [key array in order of value, textValue, listValue])
+or
+selector.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}], ['id','name','email'])
+```
+#### Fallback
+```
+selector.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}]);
+selector.addItems([['one',1,'one@sample.com'], ['two',2,'two@sample.com'], ['three',3,'three@sample.com']]);
+```
+- Assumes a pattern of ```value, textValue, listValue```
+- Then defaults to ```value, textValue``` or ```value, textValue, textValue```
+- Finally ```value``` or ```value, value, value```
 
 ## Development
 
@@ -46,6 +68,13 @@ npm run build-run
 2nd Terminal
 ```
 node serve
+```
+
+### Tests
+```
+selector.addItems([]); //Empty
+selector.addItems({}); //Object instead of array
+selector.addItems(); //Nothing
 ```
 
 ### Build

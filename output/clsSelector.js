@@ -161,28 +161,23 @@ class clsSelector extends clsBaseClass
     {
         let numResults = Array.from(this.selectorMenu.querySelectorAll('li:not(.hidden)')).length;
 
-        console.log(numResults)
-
         if (!(this.selectorInput.value != null && this.selectorInput.value.length >= this.options.minSearchLen) && numResults <= 0)
         {
+            // No items in list, search value present, no results found
             this.selectorMenu.querySelector('.no-results').classList.remove('hidden');
             this.selectorMenu.querySelector('.no-results').innerHTML = 'No results . . .';
-
-            console.log(1)
         }
         else if (numResults > 0)
         {
+            // items in list, search value not present, results present
             this.selectorMenu.querySelector('.no-results').classList.add('hidden');
             this.selectorMenu.querySelector('.no-results').innerHTML = 'Type to search . . .';
-
-            console.log(2)
         }
         else
         {
+            // items in list, search value could be present, results found
             this.selectorMenu.querySelector('.no-results').classList.remove('hidden');
             this.selectorMenu.querySelector('.no-results').innerHTML = '';
-
-            console.log(3)
         }
     }
 
@@ -205,6 +200,100 @@ class clsSelector extends clsBaseClass
         });
 
         this.containerElement.querySelector('ul').appendChild(li);
+        this.isListEmpty();
+    }
+
+    addItems(jsonData, keysArr)
+    {
+        if(typeof jsonData !== 'undefined' && jsonData && Array.isArray(jsonData) && jsonData.length <= 0)
+        {
+            console.log('clsSelector: Array is empty');
+            return;
+        }
+        else if(typeof jsonData === 'undefined' || !jsonData || !Array.isArray(jsonData))
+        {
+            console.log('clsSelector: jsonData is not array');
+            return;
+        }
+
+        //******** Determine scenario and parse Data ********
+
+        // Simple array of values no keys provided
+        if((typeof keysArr === 'undefined' || !keysArr) && Array.isArray(jsonData) && typeof jsonData[0] !== 'object')
+        {
+            jsonData.forEach((val) =>
+            {
+                this.addItem(val, val, val);
+            });
+        }
+        // Multi dimensional array but no keys passed in
+        else if(typeof keysArr === 'undefined' || !keysArr || typeof keysArr !== 'object' || !Array.isArray(keysArr) || (Array.isArray(keysArr) && keysArr.length <=0) )
+        {
+            /**
+            * Assumes a pattern of ```value, textValue, listValue```
+            * Then defaults to ```value, textValue``` or ```value, textValue, textValue```
+            * Finally ```value``` or ```value, value, value```
+            **/
+
+            //Default to first 3
+            jsonData.forEach((val) =>
+            {
+                let val1, val2, val3;
+
+                // First value
+                if(typeof Object.keys(jsonData[0])[0] !== 'undefined')
+                {
+                    val1 = val[Object.keys(jsonData[0])[0]];
+                }
+
+                // Second value
+                if(typeof Object.keys(jsonData[0])[1] !== 'undefined')
+                {
+                    val2 = val[Object.keys(jsonData[0])[1]];
+                }
+                else
+                {
+                    // default to first value
+                    val2 = val1;
+                }
+
+                // Third value
+                if(typeof Object.keys(jsonData[0])[2] !== 'undefined')
+                {
+                    val3 = val[Object.keys(jsonData[0])[2]];
+                }
+                else
+                {
+                    // default to second value assumes pattern addItem(value, textValue, listValue)
+                    val3 = val2;
+                }
+
+                this.addItem(val1, val2, val3);
+            });
+        }
+        // Array of objects multi dimensional 
+        else
+        {
+            if(keysArr.length !== 3)
+            {
+                console.error('clsSelector - addItems: key array not valid');
+                return;
+            }
+
+            if(typeof jsonData[0][keysArr[0]] === 'undefined' || typeof jsonData[0][keysArr[1]] === 'undefined' || typeof jsonData[0][keysArr[2]] === 'undefined')
+            {
+                console.error('clsSelector - addItems: key array not valid');
+                return;
+            }
+            else
+            {
+                jsonData.forEach((item) =>
+                {
+                    //value, textValue, listValue
+                    this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+                });
+            }
+        }
     }
 
     deselectItems()
