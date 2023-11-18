@@ -6,15 +6,12 @@ module.exports = {
     './www/**/*.{html,js,css}'
   ],
   darkMode: 'class',
-  safelist: [
-    'after:content-["Required"]',
-    '@container'
-  ],
   theme: {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       'black': colors.black,
+      'jet': colors.black,
       'white': colors.white,
       'slate': colors.slate,
       'gray': colors.gray,
@@ -63,15 +60,7 @@ module.exports = {
         '9999': '9999',
       },
     },
-    container: {
-      center: true,
-      padding: '2rem'
-    },
     plugins: [
-      // require('@tailwindcss/forms'),
-      // require('@tailwindcss/aspect-ratio'),
-      // require('@tailwindcss/typography'),
-      // require('@tailwindcss/line-clamp'),
       require('@tailwindcss/container-queries')
     ]
   }

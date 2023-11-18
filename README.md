@@ -77,13 +77,24 @@ selector.addItems({}); //Object instead of array
 selector.addItems(); //Nothing
 ```
 
-### Build
+### Build/Package JavaScript/CSS
 npm run build
 
 #### Just JavaScript output
 node build
 
-### Package
-npm run build
+# Build System Notes
+```
+I stumbled across a trick using tailwind to build just the css for components while flushing out the new selector and putting together a build system.
 
-//Copy all references to ```.clsSelector``` inside of [/www/content/css/clsSelector.css] to [/output/clsSelector.css] but none of the tailwind components beyond those.
+I placed the existing built T3 Tailwind theme css (already compiled) in a folder being watched by Tailwind cli while outputting a new css for just the selector and it did not put all the defaults into the new css.
+So it still built from the apply statements and combined those with any custom css to the new file.
+
+Next to try is to put a dummy tailwind theme css in the watched folder that has all the basics but none of our components in place to make the new component stand alone ready as well as compatible with our theme.
+
+The rest of the build system copies the new content (css/js) to a output folder and adds version/dev info to the top so we know what version is in use on projects.
+
+So what? This could build for Kitchen Windows, Date Picker, Data Table etc while not doubling up on existing theme content. 
+
+So what? This may be a way to create individual themes, add colors, etc
+```
