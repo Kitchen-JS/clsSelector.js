@@ -9,6 +9,8 @@ class clsSelector extends clsBaseClass
     {
         super();
 
+        this.changeEvents = [];
+
         if (typeof options === 'undefined')
         {
             console.error('clsSelector: options must be defined');
@@ -35,6 +37,10 @@ class clsSelector extends clsBaseClass
         {
             this.options.liveSearch = null;
         }
+        else
+        {
+            console.error('clsSelector - liveSearch: not implemented yet');
+        }
 
         if(typeof this.options.refresh === 'undefined')
         {
@@ -44,6 +50,11 @@ class clsSelector extends clsBaseClass
         if(this.options.refresh && this.options.liveSearch)
         {
             console.error('clsSelector: can not have both refresh and liveSearch options');
+        }
+
+        if(typeof this.options.onChange !== 'undefined')
+        {
+            this.addChangeListener(this.options.onChange);
         }
 
         this.options.minSearchLen = 3;
@@ -146,11 +157,35 @@ class clsSelector extends clsBaseClass
         this.isListEmpty();
     }
 
+    addChangeListener(func)
+    {
+        this.changeEvents.push(func);
+    }
+
+    onChange()
+    {
+        this.changeEvents.forEach((func) =>
+        {
+            func();
+        });
+    }
+
     cancel()
     {
+        let changed = false;
+        if(this.value())
+        {
+            changed = true;
+        }
+
         this.selectorInput.value = '';
         this.deselectItems();
         this.isListEmpty();
+
+        if(changed)
+        {
+            this.onChange();
+        }
     }
 
     refresh()
@@ -159,8 +194,8 @@ class clsSelector extends clsBaseClass
         {
             this.options.refresh().then((res) =>
             {
-                this.clearItems();
                 this.cancel();
+                this.clearItems();
 
                 if(typeof res.jsonData === 'object' && res.jsonData.then)
                 {
@@ -209,9 +244,11 @@ class clsSelector extends clsBaseClass
         li.innerHTML = listValue;
         li.setAttribute('textValue', textValue);
 
+        // Value changed
         li.addEventListener('click', () =>
         {
-            console.log(li, li.getAttribute('value'));
+            //console.log(li, li.getAttribute('value'));
+            this.onChange();
 
             this.selectorInput.value = li.getAttribute('textValue');
 

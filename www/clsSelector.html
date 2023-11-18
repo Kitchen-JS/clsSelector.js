@@ -66,6 +66,10 @@
         let selector = new clsSelector(
         {
             containerElement: document.querySelector('.mySelector'),
+            onChange: () =>
+            {
+              console.log('onChange option fired');
+            },
             refresh: () =>
             {
               return fetch('/content/js/selectorData.json')
@@ -75,6 +79,11 @@
                 return {jsonData: res.json(), keysArr: ['id','name', ['name','phone','email']] };
               });
             }
+        });
+
+        selector.addChangeListener(() =>
+        {
+          console.log('additional change listener fired');
         });
 
         fetch('/content/js/selectorData.json')

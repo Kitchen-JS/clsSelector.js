@@ -9,6 +9,11 @@ Simple JS Selector Class that is populated with json data
 ## Usage
 Download the latest release from the release section
 
+#### HTML
+```
+    <div class="mySelector"></div>
+```
+
 #### Empty List
 ```
     let selector = new clsSelector(
@@ -33,9 +38,22 @@ Download the latest release from the release section
     });
 ```
 
+#### onChange
+```
+    let selector = new clsSelector(
+    {
+        containerElement: document.querySelector('.mySelector'),
+        onChange: () =>
+        {
+            console.log('onChange option fired');
+        }
+    });
+```
+
 ### Options
 - refresh - method provided to get a list of possible results used in a static fashion. The refresh button can be pushed to update/repopulate list.
 - liveSearch - method provided to search an API given a search term
+- onChange - function that will fire when a change occurs
 
 ### Usage notes
 - Does not work inside an input-group but does work well within a flex-form
@@ -106,6 +124,10 @@ or
         });
     });
 ```
+
+### Change Events
+- onChange: () => {}; - Passed in as an option
+- selector.addChangeListener(() => {}); - Built externally
 
 ## Development
 
