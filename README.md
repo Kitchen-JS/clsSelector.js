@@ -3,11 +3,29 @@ Simple JS Selector Class that is populated with json data
 
 ## Usage
 Download the latest release from the release section
+
+#### Empty List
 ```
-let selector = new clsSelector(
-{
-    containerElement: document.querySelector('.mySelector')
-});
+    let selector = new clsSelector(
+    {
+        containerElement: document.querySelector('.mySelector')
+    });
+```
+
+#### Refresh
+```
+    let selector = new clsSelector(
+    {
+        containerElement: document.querySelector('.mySelector'),
+        refresh: () =>
+        {
+            return fetch('/content/js/selectorData.json')
+            .then((res) =>
+            {
+                return {jsonData: res.json(), keysArr: ['id','name', 'email'] };
+            });
+        }
+    });
 ```
 
 ### Options

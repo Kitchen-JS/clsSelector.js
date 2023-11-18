@@ -68,7 +68,12 @@
             containerElement: document.querySelector('.mySelector'),
             refresh: () =>
             {
-
+              return fetch('/content/js/selectorData.json')
+              .then((res) =>
+              {
+                //name, id, phone, email
+                return {jsonData: res.json(), keysArr: ['id','name', 'email'] };
+              });
             }
         });
 

@@ -94,12 +94,12 @@ class clsSelector extends clsBaseClass
 
         this.containerElement.querySelector('.cancel-button').addEventListener('click', () =>
         {
-            this.cancelBtn();
+            this.cancel();
         });
 
         this.containerElement.querySelector('.refresh-button').addEventListener('click', () =>
         {
-            this.refreshBtn();
+            this.refresh();
         });
 
         this.selectorInput = this.containerElement.querySelector('.selector-input');
@@ -146,15 +146,36 @@ class clsSelector extends clsBaseClass
         this.isListEmpty();
     }
 
-    cancelBtn()
+    cancel()
     {
         this.selectorInput.value = '';
         this.deselectItems();
+        this.isListEmpty();
     }
 
-    refreshBtn()
+    refresh()
     {
+        if(this.options.refresh)
+        {
+            this.options.refresh().then((res) =>
+            {
+                this.clearItems();
+                this.cancel();
 
+                if(typeof res.jsonData === 'object' && res.jsonData.then)
+                {
+                    res.jsonData
+                    .then((jsonData) =>
+                    {
+                        this.addItems(jsonData, res.keysArr);
+                    });
+                }
+                else
+                {
+                    this.addItems(res.jsonData, res.keysArr);
+                }
+            })
+        }
     }
 
     isListEmpty()
@@ -289,8 +310,19 @@ class clsSelector extends clsBaseClass
             {
                 jsonData.forEach((item) =>
                 {
-                    //value, textValue, listValue
-                    this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+                    if(typeof item[keysArr[2]] === 'object' && Array.isArray(item[keysArr[2]]))
+                    {
+                        //Handle stacked mapping of display value
+
+                        console.warn('clsSelector - addItems: stacked mapping of display value not implemented');
+
+                        //this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+                    }
+                    else
+                    {
+                        //value, textValue, listValue
+                        this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+                    }
                 });
             }
         }

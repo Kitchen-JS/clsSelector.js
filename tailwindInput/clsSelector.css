@@ -18,9 +18,9 @@
     /* h-8  */
 }
 
-.clsSelector .selector-input
+.clsSelector input
 {
-    
+    /* @apply p-6 !important; */
 }
 
 .clsSelector .selector-button
