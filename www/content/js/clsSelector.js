@@ -32,10 +32,6 @@ class clsSelector extends clsBaseClass
         {
             this.options.liveSearch = null;
         }
-        else
-        {
-            console.error('clsSelector - liveSearch: not implemented yet');
-        }
 
         if(typeof this.options.refresh === 'undefined')
         {
@@ -53,6 +49,7 @@ class clsSelector extends clsBaseClass
         }
 
         this.options.minSearchLen = 3;
+        this.keyupTimeout;
 
         this.containerElement = this.options.containerElement;
 
@@ -115,29 +112,16 @@ class clsSelector extends clsBaseClass
         this.selectorInput.addEventListener('click', () =>
         {
             this.selectorMenu.classList.remove('hidden');
-
-            // if (!this.once || !this._value)
-            // {
-            //     this.refresh(true);
-            //     this.once = true;
-            // } else
-            // {
-            //     this.filterFunction(true);
-            // }
         });
 
         this.selectorInput.addEventListener('focus', () =>
         {
             this.selectorMenu.classList.remove('hidden');
-            
-            // if (!this.once || !this._value)
-            // {
-            //     this.refresh(true);
-            //     this.once = true;
-            // } else
-            // {
-            //     this.filterFunction(true);
-            // }
+        });
+
+        this.selectorInput.addEventListener('keyup', (e) =>
+        {
+            this.searchKeyup(e);
         });
 
         // close selectorMenu if clicked off
@@ -206,6 +190,10 @@ class clsSelector extends clsBaseClass
                 }
             })
         }
+        else if(this.options.liveSearch)
+        {
+            console.log('live search refresh')
+        }
     }
 
     isListEmpty()
@@ -230,6 +218,88 @@ class clsSelector extends clsBaseClass
             this.selectorMenu.querySelector('.no-results').classList.remove('hidden');
             this.selectorMenu.querySelector('.no-results').innerHTML = '';
         }
+    }
+
+    searchKeyup(e)
+    {
+        let ignoreKeysArr = ['Shift', 'Home', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Control', 'Alt', 'Tab'];
+        let removeKeysArr = [':', ';', '-', '_', '+', '*', '%'];
+
+        let validKey = true;
+        if (typeof e.key === 'undefined' || ignoreKeysArr.indexOf(e.key) > -1)
+        {
+            clearTimeout(this.keyupTimeout);
+            validKey = false;
+            return;
+        }
+
+        if (e.key === "Enter")
+        {
+            clearTimeout(this.keyupTimeout);
+            //this.selectorMenu.classList.remove('hidden');
+            //return;
+        }
+
+        // Cancel request
+        if (e.key === "Escape")
+        {
+            clearTimeout(this.keyupTimeout);
+            this.cancel();
+            return;
+        }
+
+        let searchValue = this.selectorInput.value.toString().trim();
+
+        if(searchValue.length < this.options.minSearchLen)
+        {
+            clearTimeout(this.keyupTimeout);
+            return;
+        }
+
+        let ictr = 0;
+        while (ictr <= searchValue.length + 1)
+        {
+            removeKeysArr.forEach((invalidKey) =>
+            {
+                searchValue = searchValue.replace(invalidKey, '');
+                searchValue = searchValue.replace('  ', ' ');
+            });
+            ictr++;
+        }
+
+        searchValue = searchValue.trim();
+
+        if(searchValue.length < this.options.minSearchLen)
+        {
+            clearTimeout(this.keyupTimeout);
+            return;
+        }
+
+        this.keyupTimeout = setTimeout(() =>
+        {
+            if (validKey)
+            {
+                if(this.options.liveSearch)
+                {
+                    this.liveSearch(this.selectorInput.value);
+                }
+                else
+                {
+                    this.localSearch(this.selectorInput.value);
+                }
+            }
+        }, 850); // A value of 850 prevents duplicate submissions by waiting for user to finish
+    }
+
+    localSearch(term)
+    {
+        console.log('localSearch', term);
+    }
+
+    liveSearch(term)
+    {
+        console.log('liveSearch', term);
+        //this.options.liveSearch
     }
 
     addItem(value, textValue, listValue)

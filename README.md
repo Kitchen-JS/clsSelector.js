@@ -18,7 +18,8 @@ Download the latest release from the release section
 ```
     let selector = new clsSelector(
     {
-        containerElement: document.querySelector('.mySelector')
+        containerElement: document.querySelector('.mySelector'),
+        minSearchLen: 3,
     });
 ```
 
@@ -27,6 +28,7 @@ Download the latest release from the release section
     let selector = new clsSelector(
     {
         containerElement: document.querySelector('.mySelector'),
+        minSearchLen: 3,
         refresh: () =>
         {
             return fetch('/content/js/selectorData.json')
@@ -43,6 +45,7 @@ Download the latest release from the release section
     let selector = new clsSelector(
     {
         containerElement: document.querySelector('.mySelector'),
+        minSearchLen: 3,
         onChange: () =>
         {
             console.log('onChange option fired');
@@ -51,6 +54,7 @@ Download the latest release from the release section
 ```
 
 ### Options
+- minSearchLen - default of 3 char
 - refresh - method provided to get a list of possible results used in a static fashion. The refresh button can be pushed to update/repopulate list.
 - liveSearch - method provided to search an API given a search term
 - onChange - function that will fire when a change occurs

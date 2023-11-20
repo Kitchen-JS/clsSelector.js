@@ -66,10 +66,12 @@
         let selector = new clsSelector(
         {
             containerElement: document.querySelector('.mySelector'),
+            minSearchLen: 3,
             onChange: () =>
             {
               console.log('onChange option fired');
             },
+            //liveSearch: () => {}
             refresh: () =>
             {
               return fetch('/content/js/selectorData.json')
