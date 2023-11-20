@@ -217,7 +217,7 @@ class clsSelector extends clsBaseClass
         {
             // items in list, search value could be present, results found
             this.selectorMenu.querySelector('.no-results').classList.remove('hidden');
-            this.selectorMenu.querySelector('.no-results').innerHTML = '';
+            this.selectorMenu.querySelector('.no-results').innerHTML = 'No results . . .';
         }
     }
 
@@ -334,12 +334,21 @@ class clsSelector extends clsBaseClass
             }
 
         });
+
+        this.isListEmpty();
     }
 
     liveSearch(term)
     {
-        console.log('liveSearch', term);
-        //this.options.liveSearch
+        this.clearItems();
+
+        this.options.liveSearch(term).then((res) =>
+        {
+            if(typeof res.jsonData !== 'undefined')
+            {
+                this.addItems(res.jsonData, res.keysArr);
+            }
+        });
     }
 
     stripHTML(str)
@@ -401,8 +410,6 @@ class clsSelector extends clsBaseClass
             {
                 this.addItem(val, val, val);
             });
-
-            console.log(jsonData[0]['id'])
         }
         // Multi dimensional array but no keys passed in
         else if(typeof keysArr === 'undefined' || !keysArr || typeof keysArr !== 'object' || !Array.isArray(keysArr) || (Array.isArray(keysArr) && keysArr.length <=0) )

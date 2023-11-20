@@ -40,6 +40,24 @@ Download the latest release from the release section
     });
 ```
 
+#### LiveSearch
+```
+    let selector = new clsSelector(
+    {
+        containerElement: document.querySelector('.mySelector'),
+        minSearchLen: 3,
+        liveSearch: (term) => 
+        {
+            return fetch('/content/js/selectorData.json')
+            .then((res) =>
+            {
+            //name, id, phone, email
+            return {jsonData: res.json(), keysArr: ['id','name', ['name','phone','email']] };
+            });
+        }
+    }
+```
+
 #### onChange
 ```
     let selector = new clsSelector(
