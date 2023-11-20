@@ -71,6 +71,11 @@ Download the latest release from the release section
     });
 ```
 
+#### addChangeListener
+```
+    selector.addChangeListener(func)
+```
+
 ### Options
 - minSearchLen - default of 3 char
 - refresh - method provided to get a list of possible results used in a static fashion. The refresh button can be pushed to update/repopulate list.
