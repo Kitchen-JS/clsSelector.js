@@ -193,7 +193,7 @@ class clsSelector extends clsBaseClass
         }
         else if(this.options.liveSearch)
         {
-            console.log('live search refresh')
+            this.liveSearch(this.selectorInput.value);
         }
     }
 

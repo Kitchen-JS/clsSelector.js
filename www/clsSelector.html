@@ -44,27 +44,26 @@
             {
               console.log('onChange option fired');
             },
-            // liveSearch: (term) => 
-            // {
-            //   return fetch('/content/js/selectorData.json')
-            //   .then((res) =>
-            //   {
-
-            //     return res.json().then((result) =>
-            //     {
-            //       return {jsonData: result, keysArr: ['id','name', ['name','phone','email']] };
-            //     });
-            //   });
-            // }
-            refresh: () =>
+            liveSearch: (term) => 
             {
               return fetch('/content/js/selectorData.json')
               .then((res) =>
               {
-                //name, id, phone, email
-                return {jsonData: res.json(), keysArr: ['id','name', ['name','phone','email']] };
+                return res.json().then((result) =>
+                {
+                  return {jsonData: result, keysArr: ['id','name', ['name','phone','email']] };
+                });
               });
             }
+            // refresh: () =>
+            // {
+            //   return fetch('/content/js/selectorData.json')
+            //   .then((res) =>
+            //   {
+            //     //name, id, phone, email
+            //     return {jsonData: res.json(), keysArr: ['id','name', ['name','phone','email']] };
+            //   });
+            // }
         });
 
         selector.addChangeListener(() =>
@@ -72,15 +71,15 @@
           console.log('additional change listener fired');
         });
 
-        fetch('/content/js/selectorData.json')
-        .then((res) =>
-        {
-          res.json().then((result) =>
-          {
-            //Stacked mapping
-            selector.addItems(result, ['id','name', ['name','phone','email']]);
-          });
-        });
+        // fetch('/content/js/selectorData.json')
+        // .then((res) =>
+        // {
+        //   res.json().then((result) =>
+        //   {
+        //     //Stacked mapping
+        //     selector.addItems(result, ['id','name', ['name','phone','email']]);
+        //   });
+        // });
         
 
         document.querySelector('.val').addEventListener('click', () =>
