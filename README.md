@@ -64,6 +64,8 @@ Download the latest release from the release section
 
 ### Add single items to selector
 ```selector.addItem('value1', 'textValue1', 'listValue1');```
+or
+```selector.addItem('value', 'textValue', 'listValue', 'searchRank');```
 
 ### Add simple array of items
 ```selector.addItems(['one', 'two', 'three']);```
@@ -87,6 +89,11 @@ fetch('/content/js/selectorData.json')
     });
 });
 ```
+
+### Note on Search Rank from API
+Be sure a key exists for searchRank. Only works for json set that contains keys and not simple arrays
+- ToDo:// pass in key for searchRank if different than searchRank
+
 #### Fallback
 ```
 selector.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}]);

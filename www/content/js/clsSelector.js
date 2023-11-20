@@ -354,13 +354,13 @@ class clsSelector extends clsBaseClass
         }
     }
 
-    addItem(value, textValue, listValue)
+    addItem(value, textValue, listValue, searchRank)
     {
         let li = document.createElement('li');
         li.setAttribute('value', value);
         li.innerHTML = listValue;
         li.setAttribute('textValue', textValue);
-        li.setAttribute('SearchRank', '0');
+        li.setAttribute('SearchRank', searchRank || '0');
 
         // Value changed
         li.addEventListener('click', () =>
@@ -401,6 +401,8 @@ class clsSelector extends clsBaseClass
             {
                 this.addItem(val, val, val);
             });
+
+            console.log(jsonData[0]['id'])
         }
         // Multi dimensional array but no keys passed in
         else if(typeof keysArr === 'undefined' || !keysArr || typeof keysArr !== 'object' || !Array.isArray(keysArr) || (Array.isArray(keysArr) && keysArr.length <=0) )
@@ -444,7 +446,16 @@ class clsSelector extends clsBaseClass
                     val3 = val2;
                 }
 
-                this.addItem(val1, val2, val3);
+                //this.addItem(val1, val2, val3);
+
+                if(typeof jsonData[0]['searchrank'] !== 'undefined')
+                {
+                    this.addItem(val1, val2, val3, item['searchrank']);
+                }
+                else
+                {
+                    this.addItem(val1, val2, val3);
+                }
             });
         }
         // Array of objects multi dimensional 
@@ -491,12 +502,30 @@ class clsSelector extends clsBaseClass
                             fieldCtr++;
                         });
 
-                        this.addItem(item[keysArr[0]], item[keysArr[1]], displayValue);
+                        // Handle Search Rank if passed in
+                        if(typeof jsonData[0]['searchrank'] !== 'undefined')
+                        {
+                            this.addItem(item[keysArr[0]], item[keysArr[1]], displayValue, item['searchrank']);
+                        }
+                        else
+                        {
+                            this.addItem(item[keysArr[0]], item[keysArr[1]], displayValue);
+                        }
                     }
                     else
                     {
                         //value, textValue, listValue
-                        this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+                        //this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+
+                        // Handle Search Rank if passed in
+                        if(typeof jsonData[0]['searchrank'] !== 'undefined')
+                        {
+                            this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]], item['searchrank']);
+                        }
+                        else
+                        {
+                            this.addItem(item[keysArr[0]], item[keysArr[1]], item[keysArr[2]]);
+                        }
                     }
                 });
             }
