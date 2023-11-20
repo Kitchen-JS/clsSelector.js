@@ -159,6 +159,7 @@ class clsSelector extends clsBaseClass
 
         this.selectorInput.value = '';
         this.deselectItems();
+        this.showAllItems();
         this.isListEmpty();
 
         if(changed)
@@ -293,7 +294,46 @@ class clsSelector extends clsBaseClass
 
     localSearch(term)
     {
-        console.log('localSearch', term);
+        term = term.toLowerCase();
+
+        this.deselectItems();
+        this.showAllItems();
+
+        let termArr = term.split(' ');
+        
+        termArr.forEach((word) =>
+        {
+            Array.from(this.containerElement.querySelectorAll('ul li')).forEach((item) =>
+            {
+                if(item.getAttribute('value').toLowerCase().indexOf(word) > -1 || item.getAttribute('textValue').toLowerCase().indexOf(word) > -1 || this.stripHTML(item.innerHTML).toLowerCase().indexOf(word) > -1)
+                {
+                    let SearchRank = parseInt(item.getAttribute('SearchRank'));
+
+                    let matchPattern = new RegExp(`${word}`,"g");
+
+                    SearchRank += (item.getAttribute('value').toLowerCase().match(matchPattern) || []).length;
+                    SearchRank += (item.getAttribute('textValue').toLowerCase().match(matchPattern) || []).length;
+                    SearchRank += (this.stripHTML(item.innerHTML).toLowerCase().match(matchPattern) || []).length;
+
+                    item.setAttribute('SearchRank', SearchRank);
+                }
+            });
+        });
+
+        Array.from(this.containerElement.querySelectorAll('ul li')).forEach((item) =>
+        {
+            let SearchRank = parseInt(item.getAttribute('SearchRank'));
+
+            if(SearchRank > 0)
+            {
+                item.classList.remove('hidden');
+            }
+            else if (SearchRank <= 0)
+            {
+                item.classList.add('hidden');
+            }
+
+        });
     }
 
     liveSearch(term)
@@ -302,12 +342,25 @@ class clsSelector extends clsBaseClass
         //this.options.liveSearch
     }
 
+    stripHTML(str)
+    {
+        if(str && str.length > 0)
+        {
+            return str.replace( /(<([^>]+)>)/ig, '');
+        }
+        else
+        {
+            return '';
+        }
+    }
+
     addItem(value, textValue, listValue)
     {
         let li = document.createElement('li');
         li.setAttribute('value', value);
         li.innerHTML = listValue;
         li.setAttribute('textValue', textValue);
+        li.setAttribute('SearchRank', '0');
 
         // Value changed
         li.addEventListener('click', () =>
@@ -450,6 +503,7 @@ class clsSelector extends clsBaseClass
         }
     }
 
+    // Clear Selected Status
     deselectItems()
     {
         Array.from(this.containerElement.querySelector('ul').querySelectorAll('li')).forEach((li) =>
@@ -458,9 +512,20 @@ class clsSelector extends clsBaseClass
         });
     }
 
+    // Unhide from local search
+    showAllItems()
+    {
+        Array.from(this.containerElement.querySelectorAll('ul li')).forEach((item) =>
+        {
+            item.classList.remove('hidden');
+            item.setAttribute('SearchRank', '0');
+        });
+    }
+
     clearItems()
     {
         this.deselectItems();
+        this.showAllItems();
         this.containerElement.querySelector('ul').innerHTML = '';
     }
 

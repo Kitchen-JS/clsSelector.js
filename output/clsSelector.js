@@ -37,10 +37,6 @@ class clsSelector extends clsBaseClass
         {
             this.options.liveSearch = null;
         }
-        else
-        {
-            console.error('clsSelector - liveSearch: not implemented yet');
-        }
 
         if(typeof this.options.refresh === 'undefined')
         {
@@ -58,6 +54,7 @@ class clsSelector extends clsBaseClass
         }
 
         this.options.minSearchLen = 3;
+        this.keyupTimeout;
 
         this.containerElement = this.options.containerElement;
 
@@ -120,29 +117,16 @@ class clsSelector extends clsBaseClass
         this.selectorInput.addEventListener('click', () =>
         {
             this.selectorMenu.classList.remove('hidden');
-
-            // if (!this.once || !this._value)
-            // {
-            //     this.refresh(true);
-            //     this.once = true;
-            // } else
-            // {
-            //     this.filterFunction(true);
-            // }
         });
 
         this.selectorInput.addEventListener('focus', () =>
         {
             this.selectorMenu.classList.remove('hidden');
-            
-            // if (!this.once || !this._value)
-            // {
-            //     this.refresh(true);
-            //     this.once = true;
-            // } else
-            // {
-            //     this.filterFunction(true);
-            // }
+        });
+
+        this.selectorInput.addEventListener('keyup', (e) =>
+        {
+            this.searchKeyup(e);
         });
 
         // close selectorMenu if clicked off
@@ -180,6 +164,7 @@ class clsSelector extends clsBaseClass
 
         this.selectorInput.value = '';
         this.deselectItems();
+        this.showAllItems();
         this.isListEmpty();
 
         if(changed)
@@ -211,6 +196,10 @@ class clsSelector extends clsBaseClass
                 }
             })
         }
+        else if(this.options.liveSearch)
+        {
+            console.log('live search refresh')
+        }
     }
 
     isListEmpty()
@@ -237,12 +226,146 @@ class clsSelector extends clsBaseClass
         }
     }
 
+    searchKeyup(e)
+    {
+        let ignoreKeysArr = ['Shift', 'Home', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Control', 'Alt', 'Tab'];
+        let removeKeysArr = [':', ';', '-', '_', '+', '*', '%'];
+
+        let validKey = true;
+        if (typeof e.key === 'undefined' || ignoreKeysArr.indexOf(e.key) > -1)
+        {
+            clearTimeout(this.keyupTimeout);
+            validKey = false;
+            return;
+        }
+
+        if (e.key === "Enter")
+        {
+            clearTimeout(this.keyupTimeout);
+            //this.selectorMenu.classList.remove('hidden');
+            //return;
+        }
+
+        // Cancel request
+        if (e.key === "Escape")
+        {
+            clearTimeout(this.keyupTimeout);
+            this.cancel();
+            return;
+        }
+
+        let searchValue = this.selectorInput.value.toString().trim();
+
+        if(searchValue.length < this.options.minSearchLen)
+        {
+            clearTimeout(this.keyupTimeout);
+            return;
+        }
+
+        let ictr = 0;
+        while (ictr <= searchValue.length + 1)
+        {
+            removeKeysArr.forEach((invalidKey) =>
+            {
+                searchValue = searchValue.replace(invalidKey, '');
+                searchValue = searchValue.replace('  ', ' ');
+            });
+            ictr++;
+        }
+
+        searchValue = searchValue.trim();
+
+        if(searchValue.length < this.options.minSearchLen)
+        {
+            clearTimeout(this.keyupTimeout);
+            return;
+        }
+
+        this.keyupTimeout = setTimeout(() =>
+        {
+            if (validKey)
+            {
+                if(this.options.liveSearch)
+                {
+                    this.liveSearch(this.selectorInput.value);
+                }
+                else
+                {
+                    this.localSearch(this.selectorInput.value);
+                }
+            }
+        }, 850); // A value of 850 prevents duplicate submissions by waiting for user to finish
+    }
+
+    localSearch(term)
+    {
+        term = term.toLowerCase();
+
+        this.deselectItems();
+        this.showAllItems();
+
+        let termArr = term.split(' ');
+        
+        termArr.forEach((word) =>
+        {
+            Array.from(this.containerElement.querySelectorAll('ul li')).forEach((item) =>
+            {
+                if(item.getAttribute('value').toLowerCase().indexOf(word) > -1 || item.getAttribute('textValue').toLowerCase().indexOf(word) > -1 || this.stripHTML(item.innerHTML).toLowerCase().indexOf(word) > -1)
+                {
+                    let SearchRank = parseInt(item.getAttribute('SearchRank'));
+
+                    let matchPattern = new RegExp(`${word}`,"g");
+
+                    SearchRank += (item.getAttribute('value').toLowerCase().match(matchPattern) || []).length;
+                    SearchRank += (item.getAttribute('textValue').toLowerCase().match(matchPattern) || []).length;
+                    SearchRank += (this.stripHTML(item.innerHTML).toLowerCase().match(matchPattern) || []).length;
+
+                    item.setAttribute('SearchRank', SearchRank);
+                }
+            });
+        });
+
+        Array.from(this.containerElement.querySelectorAll('ul li')).forEach((item) =>
+        {
+            let SearchRank = parseInt(item.getAttribute('SearchRank'));
+
+            if(SearchRank > 0)
+            {
+                item.classList.remove('hidden');
+            }
+            else if (SearchRank <= 0)
+            {
+                item.classList.add('hidden');
+            }
+
+        });
+    }
+
+    liveSearch(term)
+    {
+        console.log('liveSearch', term);
+        //this.options.liveSearch
+    }
+
+    stripHTML(str)
+    {
+        if(str && str.length > 0)
+        {
+            return str.replace( /(<([^>]+)>)/ig, '');
+        }
+        else
+        {
+            return '';
+        }
+    }
+
     addItem(value, textValue, listValue)
     {
         let li = document.createElement('li');
         li.setAttribute('value', value);
         li.innerHTML = listValue;
         li.setAttribute('textValue', textValue);
+        li.setAttribute('SearchRank', '0');
 
         // Value changed
         li.addEventListener('click', () =>
@@ -385,6 +508,7 @@ class clsSelector extends clsBaseClass
         }
     }
 
+    // Clear Selected Status
     deselectItems()
     {
         Array.from(this.containerElement.querySelector('ul').querySelectorAll('li')).forEach((li) =>
@@ -393,9 +517,20 @@ class clsSelector extends clsBaseClass
         });
     }
 
+    // Unhide from local search
+    showAllItems()
+    {
+        Array.from(this.containerElement.querySelectorAll('ul li')).forEach((item) =>
+        {
+            item.classList.remove('hidden');
+            item.setAttribute('SearchRank', '0');
+        });
+    }
+
     clearItems()
     {
         this.deselectItems();
+        this.showAllItems();
         this.containerElement.querySelector('ul').innerHTML = '';
     }
 
