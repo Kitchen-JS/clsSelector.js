@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>clsSelector</title>
+
+    <meta name="language" content="EN">
+
+    <link rel="stylesheet" type="text/css" href="/content/fonts/pfi.css">
+    <link rel="stylesheet" type="text/css" href="/content/css/tailwindTheme.css">
+
+    <script src="/content/fonts/pfi.js"></script>
+    <script src="/content/js/tailwind.js"></script>
+    <script src="/content/js/clsBaseClass.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/content/css/clsSelector.css">
+    <script src="/content/js/clsSelector.js"></script>
+  </head>
+  <body>
+    <div class="@container container">
+      
+      
+        
+      <div class="flex-form">
+        <div class="mySelector"></div>
+
+        <button class="val button btn">Get Value</button>
+        
+      </div>
+    </div>
+    
+    <script>
+        let sampleDataSimple = ['one', 'two', 'three'];
+        let sampleDataObject = [{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}];
+        let sampleDataObjectArrOfArr = [['one',1,'one@sample.com'], ['two',2,'two@sample.com'], ['three',3,'three@sample.com']];
+
+        let selector = new clsSelector(
+        {
+            containerElement: document.querySelector('.mySelector'),
+            minSearchLen: 3,
+            onChange: () =>
+            {
+              console.log('onChange option fired');
+            },
+            liveSearch: (term) => 
+            {
+              return fetch('/content/js/selectorData.json')
+              .then((res) =>
+              {
+                return res.json().then((result) =>
+                {
+                  return {jsonData: result, keysArr: ['id','name', ['name','phone','email']] };
+                });
+              });
+            }
+            // refresh: () =>
+            // {
+            //   return fetch('/content/js/selectorData.json')
+            //   .then((res) =>
+            //   {
+            //     //name, id, phone, email
+            //     return {jsonData: res.json(), keysArr: ['id','name', ['name','phone','email']] };
+            //   });
+            // }
+        });
+
+        selector.addChangeListener(() =>
+        {
+          console.log('additional change listener fired');
+        });
+
+        // fetch('/content/js/selectorData.json')
+        // .then((res) =>
+        // {
+        //   res.json().then((result) =>
+        //   {
+        //     //Stacked mapping
+        //     selector.addItems(result, ['id','name', ['name','phone','email']]);
+        //   });
+        // });
+        
+
+        document.querySelector('.val').addEventListener('click', () =>
+        {
+          console.log(selector.value())
+        });
+    </script>
+  </body>
+  <script>
+
+  </script>  
+
+   
+</html>

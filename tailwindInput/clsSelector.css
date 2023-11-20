@@ -1,0 +1,60 @@
+/* .dark .clsSelector
+{
+}
+
+.lite .clsSelector
+{
+} */
+
+/* Theme form integration */
+.input-group .clsSelector
+{
+    @apply w-full h-full;
+}
+
+.clsSelector
+{
+    @apply w-full border;
+    /* h-8  */
+}
+
+.clsSelector input
+{
+    /* @apply p-6 !important; */
+}
+
+.clsSelector .selector-button
+{
+    @apply font-black;
+}
+
+.clsSelector .selector-dropdown
+{
+    @apply min-w-full min-h-full border-0;
+}
+
+.clsSelector .dropdown-main-container
+{
+    @apply relative block h-auto;
+}
+
+.clsSelector .dropdown-inner-container
+{
+    @apply top-2 ring-2 ring-gold rounded-md;
+    @apply absolute min-w-full overflow-hidden z-9000;
+}
+
+.clsSelector option.no-results
+{
+    @apply min-w-full p-2 bg-white z-9000;
+}
+
+.clsSelector ul
+{
+    @apply min-w-full max-h-96 focus:outline-none overflow-auto z-9999;
+}
+
+.clsSelector ul li
+{
+    @apply whitespace-pre-line;
+}
