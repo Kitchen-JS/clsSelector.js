@@ -65,7 +65,7 @@ class clsSelector extends clsBaseClass
     {
         let id = this.randomID();
 
-        this.containerElement.classList.add('clsSelector');        
+        this.containerElement.classList.add('clsSelector');
 
         this.containerElement.innerHTML = `
             <div class="main-input input-group">
