@@ -1,3 +1,8 @@
+/**************************************
+clsSelector: v3.0.0
+TailWind: v^3.3.5
+**************************************/
+
 class clsSelector extends clsBaseClass
 {
     constructor(options)
@@ -65,7 +70,7 @@ class clsSelector extends clsBaseClass
     {
         let id = this.randomID();
 
-        this.containerElement.classList.add('clsSelector');
+        this.containerElement.classList.add('clsSelector');        
 
         this.containerElement.innerHTML = `
             <div class="main-input input-group">
@@ -374,13 +379,16 @@ class clsSelector extends clsBaseClass
         // Value changed
         li.addEventListener('click', () =>
         {
-            //console.log(li, li.getAttribute('value'));
+            this._selected = {
+                value:value,
+                textValue:textValue,
+                listValue: listValue,
+                searchRank: searchRank
+            };
+            this._value = value;
             this.onChange();
-
             this.selectorInput.value = li.getAttribute('textValue');
-
             this.deselectItems();
-
             li.setAttribute('selected', true);
         });
 
@@ -565,18 +573,8 @@ class clsSelector extends clsBaseClass
         this.containerElement.querySelector('ul').innerHTML = '';
     }
 
-    //ToDo:// set value
-    value()
+    value(verbose = false)
     {
-        let val = null;
-        Array.from(this.containerElement.querySelector('ul').querySelectorAll('li')).filter((li) =>
-        {
-            if(li.getAttribute('selected') === 'true')
-            {
-                val = li.getAttribute('value');
-            }
-        });
-
-        return val;
+        return verbose ? this._selected : this._value;
     }
 }
