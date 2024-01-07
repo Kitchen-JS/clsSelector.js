@@ -1,3 +1,10 @@
+:root
+{
+    --clsSelector-lg-w: calc(1500px / 1);
+    --clsSelector-md-w: calc(900px / 1);
+    --clsSelector-sm-w: calc(400px / 1);
+}
+
 /* .dark .clsSelector
 {
 }
@@ -9,18 +16,40 @@
 /* Theme form integration */
 .input-group .clsSelector
 {
-    @apply w-full h-full;
+    @apply h-full max-h-[100%] !important;
 }
 
 .clsSelector
 {
-    @apply w-full border;
-    /* h-8  */
+    /*Need responsive sizes*/
+    @apply relative;
+    @apply block;
+    @apply overflow-hidden;
+
+    /* From Theme .input-group min-h-[3rem] + 1rem padding */
+    @apply h-[4rem];
+    
+    @apply max-w-[100%] w-[30rem] min-w-[10rem];
+    /* @apply max-w-[35rem] w-[30rem] min-w-[10rem]; */
+    /* Theme .flex-form flex breakpoints and columns */
+    /* @apply lg:min-w-[--clsSelector-lg-w] lg:max-w-[--clsSelector-lg-w] lg:w-[--clsSelector-lg-w];
+    @apply md:min-w-[--clsSelector-md-w] md:max-w-[--clsSelector-md-w] md:w-[--clsSelector-md-w];
+    @apply sm:min-w-[--clsSelector-sm-w] md:max-w-[--clsSelector-sm-w] md:w-[--clsSelector-sm-w]; */
+}
+
+.clsSelector .main-input
+{
+    @apply relative min-h-[3rem] rounded-md overflow-scroll;
+    @apply flex flex-nowrap;
+    @apply border-2 border-gray-400;
+    @apply dark:ring-gray-600;
+    @apply overflow-hidden;
 }
 
 .clsSelector input
 {
-    /* @apply p-6 !important; */
+    @apply placeholder-transparent;
+    @apply w-full;
 }
 
 .clsSelector .selector-button
@@ -28,33 +57,65 @@
     @apply font-black;
 }
 
-.clsSelector .selector-dropdown
+/** Dropdown Div Start **/
+.clsSelector menu
 {
-    @apply min-w-full min-h-full border-0;
+    @apply fixed;
+    @apply border-0;
+    @apply z-9000;
+
+    width: inherit !important;
+    min-width: inherit !important;
+    max-width: inherit !important;
+    overflow: auto;
 }
 
 .clsSelector .dropdown-main-container
 {
-    @apply relative block h-auto;
+    @apply relative;
+    @apply overflow-y-auto;
+
+    width: inherit !important;
+    min-width: inherit !important;
+    max-width: inherit !important;
 }
 
 .clsSelector .dropdown-inner-container
 {
-    @apply top-2 ring-2 ring-gold rounded-md;
-    @apply absolute min-w-full overflow-hidden z-9000;
+    /* @apply relative; */
+    /* @apply ring-2 ring-gold rounded-md; */
+
+    width: inherit !important;
+    min-width: inherit !important;
+    max-width: inherit !important;
 }
 
 .clsSelector option.no-results
 {
-    @apply min-w-full p-2 bg-white z-9000;
+    /* @apply relative; */
+    @apply z-9999;
+    @apply p-2 bg-white;
+    
+    width: inherit !important;
+    min-width: inherit !important;
+    max-width: inherit !important;
 }
 
 .clsSelector ul
 {
-    @apply min-w-full max-h-96 focus:outline-none overflow-auto z-9999;
+    /* @apply relative; */
+    @apply z-9999;
+    @apply max-h-96 focus:outline-none;
+    @apply list-none;
+
+    width: inherit !important;
+    min-width: inherit !important;
+    max-width: inherit !important;
+    
 }
 
 .clsSelector ul li
 {
+    @apply w-full;
     @apply whitespace-pre-line;
 }

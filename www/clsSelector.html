@@ -20,13 +20,31 @@
   </head>
   <body>
     <div class="@container container">
+
+   
       
       
         
       <div class="flex-form">
-        <div class="mySelector"></div>
+
+
+        <div class="input-group"><div class="mySelector"></div></div>
+
+        <div class="input-group">
+          <select>
+            <option></option>
+            <option>A</option>
+            <option>B</option>
+          </select>
+        </div>
+        
 
         <button class="val button btn">Get Value</button>
+
+        <div>
+          <div class="mySelector2 inline-block"></div> <button class="btn inline-block">Foo Button</button>
+        </div>
+        
         
       </div>
     </div>
@@ -39,22 +57,22 @@
         let selector = new clsSelector(
         {
             containerElement: document.querySelector('.mySelector'),
-            minSearchLen: 3,
-            onChange: () =>
-            {
-              console.log('onChange option fired');
-            },
-            liveSearch: (term) => 
-            {
-              return fetch('/content/js/selectorData.json')
-              .then((res) =>
-              {
-                return res.json().then((result) =>
-                {
-                  return {jsonData: result, keysArr: ['id','name', ['name','phone','email']] };
-                });
-              });
-            }
+            minSearchLen: 0,
+            // onChange: () =>
+            // {
+            //   console.log('onChange option fired');
+            // },
+            // liveSearch: (term) => 
+            // {
+            //   return fetch('/content/js/selectorData.json')
+            //   .then((res) =>
+            //   {
+            //     return res.json().then((result) =>
+            //     {
+            //       return {jsonData: result, keysArr: ['id','name', ['name','phone','email']] };
+            //     });
+            //   });
+            // }
             // refresh: () =>
             // {
             //   return fetch('/content/js/selectorData.json')
@@ -66,10 +84,16 @@
             // }
         });
 
-        selector.addChangeListener(() =>
+        let selector2 = new clsSelector(
         {
-          console.log('additional change listener fired');
+            containerElement: document.querySelector('.mySelector2'),
+            minSearchLen: 0,
         });
+
+        // selector.addChangeListener(() =>
+        // {
+        //   console.log('additional change listener fired');
+        // });
 
         // fetch('/content/js/selectorData.json')
         // .then((res) =>
@@ -80,6 +104,11 @@
         //     selector.addItems(result, ['id','name', ['name','phone','email']]);
         //   });
         // });
+
+
+        selector.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}], ['id','name',['name','phone','email']]);
+        selector2.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}], ['id','name',['name','phone','email']]);
+        
         
 
         document.querySelector('.val').addEventListener('click', () =>

@@ -68,7 +68,7 @@ class clsSelector extends clsBaseClass
         this.containerElement.classList.add('clsSelector');
 
         this.containerElement.innerHTML = `
-            <div class="main-input input-group">
+            <div class="main-input">
                 <input class="selector-input peer" type="text" role="listbox" data-bs-toggle="dropdown" data-bs-target="#${id}" aria-expanded="false" aria-controls="menu" placeholder="Select an option . . . " />
                 <label for="selector-input" class="selector-heading input-label">Select an option . . . </label>
                 <button aria-label="selector-refresh-button" role="button" class="selector-button btn btn-light refresh-button">
