@@ -1,3 +1,10 @@
+:root
+{
+  --clsSelector-lg-w: calc(1500px / 1);
+  --clsSelector-md-w: calc(900px / 1);
+  --clsSelector-sm-w: calc(400px / 1);
+}
+
 /* .dark .clsSelector
 {
 }
@@ -10,80 +17,138 @@
 
 .input-group .clsSelector
 {
-  height: 100%;
-  width: 100%
+  height: 100% !important;
+  max-height: 100% !important;
 }
 
 .clsSelector
 {
-  width: 100%;
-  border-width: 1px
-  /* h-8  */
+  /*Need responsive sizes*/
+  position: relative;
+  display: block;
+  overflow: hidden;
+  /* From Theme .input-group min-h-[3rem] + 1rem padding */
+  height: 4rem;
+  width: 30rem;
+  min-width: 10rem;
+  max-width: 100%;
+  /* @apply max-w-[35rem] w-[30rem] min-w-[10rem]; */
+  /* Theme .flex-form flex breakpoints and columns */
+  /* @apply lg:min-w-[--clsSelector-lg-w] lg:max-w-[--clsSelector-lg-w] lg:w-[--clsSelector-lg-w];
+    @apply md:min-w-[--clsSelector-md-w] md:max-w-[--clsSelector-md-w] md:w-[--clsSelector-md-w];
+    @apply sm:min-w-[--clsSelector-sm-w] md:max-w-[--clsSelector-sm-w] md:w-[--clsSelector-sm-w]; */
+}
+
+.clsSelector .main-input
+{
+  position: relative;
+  min-height: 3rem;
+  overflow: scroll;
+  border-radius: 0.375rem;
+  display: flex;
+  flex-wrap: nowrap;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+
+:is(.dark .clsSelector .main-input)
+{
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(75 85 99 / var(--tw-ring-opacity));
+}
+
+.clsSelector .main-input
+{
+  overflow: hidden;
+}
+
+.clsSelector input::-moz-placeholder
+{
+  color: transparent;
+}
+
+.clsSelector input::placeholder
+{
+  color: transparent;
 }
 
 .clsSelector input
 {
-  /* @apply p-6 !important; */
+  width: 100%;
 }
 
 .clsSelector .selector-button
 {
-  font-weight: 900
+  font-weight: 900;
 }
 
-.clsSelector .selector-dropdown
+/** Dropdown Div Start **/
+
+.clsSelector menu
 {
-  min-height: 100%;
-  min-width: 100%;
-  border-width: 0px
+  position: fixed;
+  border-width: 0px;
+  z-index: 9000;
+  width: inherit !important;
+  min-width: inherit !important;
+  max-width: inherit !important;
+  overflow: auto;
 }
 
 .clsSelector .dropdown-main-container
 {
   position: relative;
-  display: block;
-  height: auto
+  overflow-y: auto;
+  width: inherit !important;
+  min-width: inherit !important;
+  max-width: inherit !important;
 }
 
 .clsSelector .dropdown-inner-container
 {
-  top: 0.5rem;
-  border-radius: 0.375rem;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(255 213 48 / var(--tw-ring-opacity));
-  position: absolute;
-  z-index: 9000;
-  min-width: 100%;
-  overflow: hidden
+  /* @apply relative; */
+  /* @apply ring-2 ring-gold rounded-md; */
+  width: inherit !important;
+  min-width: inherit !important;
+  max-width: inherit !important;
 }
 
 .clsSelector option.no-results
 {
-  z-index: 9000;
-  min-width: 100%;
+  /* @apply relative; */
+  z-index: 9999;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  padding: 0.5rem
+  padding: 0.5rem;
+  width: inherit !important;
+  min-width: inherit !important;
+  max-width: inherit !important;
 }
 
 .clsSelector ul
 {
+  /* @apply relative; */
   z-index: 9999;
   max-height: 24rem;
-  min-width: 100%;
-  overflow: auto
 }
 
 .clsSelector ul:focus
 {
   outline: 2px solid transparent;
-  outline-offset: 2px
+  outline-offset: 2px;
+}
+
+.clsSelector ul
+{
+  list-style-type: none;
+  width: inherit !important;
+  min-width: inherit !important;
+  max-width: inherit !important;
 }
 
 .clsSelector ul li
 {
-  white-space: pre-line
+  width: 100%;
+  white-space: pre-line;
 }

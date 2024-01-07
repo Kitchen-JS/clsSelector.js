@@ -14,7 +14,7 @@ Download the latest release from the release section
     <div class="mySelector"></div>
 ```
 
-#### Empty List
+#### Empty List / Static List
 ```
     let selector = new clsSelector(
     {
