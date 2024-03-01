@@ -1,6 +1,11 @@
 /**************************************
-clsSelector: v3.0.0
-TailWind: v^3.3.5
+* clsselector - A JavaScript Selector that handles json data
+* @version v3.0.0
+* clsSelector: v3.0.0
+* TailWind: v^3.3.5
+* @lastBuild Fri Mar 01 2024 17:06:06 GMT-0600 (Central Standard Time)
+* @author KitchenJS
+* @link https://github.com/Kitchen-JS/clsselector.js
 **************************************/
 
 class clsSelector extends clsBaseClass

@@ -11,8 +11,13 @@ fs.readFile(jsInputPath, {encoding: 'utf-8'}, async (err,data) =>
     if (!err) 
     {
         jsContent = `/**************************************
-clsSelector: ${pkg.version}
-TailWind: v${pkg.devDependencies.tailwindcss}
+* ${pkg.name} - ${pkg.description}
+* @version ${pkg.version}
+* clsSelector: ${pkg.version}
+* TailWind: v${pkg.devDependencies.tailwindcss}
+* @lastBuild ${new Date()}
+* @author KitchenJS
+* @link https://github.com/Kitchen-JS/${pkg.name}.js
 **************************************/
 
 ${data}`;
@@ -44,9 +49,15 @@ fs.readFile(cssInputPath, {encoding: 'utf-8'}, async (err,data) =>
     if (!err) 
     {
         cssContent = `/**************************************
-clsSelector: ${pkg.version}
-PEC T3-Tailwind-Theme Latest Version
-TailWind: v${pkg.devDependencies.tailwindcss}
+* ${pkg.name} - ${pkg.description}
+* @version ${pkg.version}
+* clsSelector: ${pkg.version}
+* PEC T3-Tailwind-Theme Latest Version
+* TailWind: v${pkg.devDependencies.tailwindcss}
+* @lastBuild ${new Date()}
+* @author KitchenJS
+* @link https://github.com/Kitchen-JS/${pkg.name}.js
+
 **************************************/
 
 ${data}`;
