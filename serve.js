@@ -7,5 +7,5 @@ app.use(express.static('www'));
 
 app.listen(port, () => 
 {
-    console.log(`Tailwind theme served on port ${port}`)
+    console.log(`clsSelector.js served on port ${port}`)
 });

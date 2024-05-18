@@ -1,5 +1,0 @@
-/**************************************
-T3-TailWind-Theme: v2.0.2
-TailWind: v^3.3.3
-**************************************/
-const tailWind = {"colors":["transparent","current","black","white","slate","gray","zinc","neutral","stone","red","orange","amber","yellow","lime","green","emerald","teal","cyan","sky","blue","indigo","violet","purple","fuchia","pink","rose","success","fail","cancel","army-black","army-gold","army-white","gold","light-camo","dark-camo"],"fontFamilies":["sans","serif","mono"],"fontFamilyDetails":{"sans":["ui-sans-serif","system-ui","-apple-system","BlinkMacSystemFont","Segoe UI","Roboto","Helvetica Neue","Arial","Noto Sans","sans-serif","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"],"serif":["ui-serif","Georgia","Cambria","Times New Roman","Times","serif"],"mono":["ui-monospace","SFMono-Regular","Menlo","Monaco","Consolas","Liberation Mono","Courier New","monospace"]}}

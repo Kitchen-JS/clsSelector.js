@@ -52,7 +52,7 @@
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 
-:is(.dark .clsSelector .main-input)
+.clsSelector .main-input:is(.dark *)
 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(75 85 99 / var(--tw-ring-opacity));
