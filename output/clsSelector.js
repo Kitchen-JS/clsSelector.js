@@ -1,7 +1,7 @@
 /**************************************
 * clsselector - A JavaScript Selector that handles json data
-* @version v3.0.1
-* @lastBuild Sat May 18 2024 15:36:36 GMT-0500 (Central Daylight Time)
+* @version v3.0.3
+* @lastBuild Sat May 18 2024 15:40:26 GMT-0500 (Central Daylight Time)
 * TailWind: v^3.3.5
 * @author KitchenJS
 * @link https://github.com/Kitchen-JS/clsselector
