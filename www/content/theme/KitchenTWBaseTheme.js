@@ -1,7 +1,7 @@
 /**************************************
 * kitchentwbasetheme - Base theme for KitchenJS apps and components
-* @version 0.1.1
-* @lastBuild Sat May 18 2024 10:12:36 GMT-0500 (Central Daylight Time)
+* @version 0.1.2
+* @lastBuild Sun May 19 2024 15:43:05 GMT-0500 (Central Daylight Time)
 * @author KitchenJS
 * @link https://github.com/Kitchen-JS/kitchentwbasetheme
 * TailWind: v^3.4.1

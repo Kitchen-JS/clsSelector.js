@@ -1,7 +1,16 @@
 /**************************************
 * clsselector - A JavaScript Selector that handles json data
+* @version v3.0.4
+* @lastBuild Sun May 19 2024 15:46:07 GMT-0500 (Central Daylight Time)
+* TailWind: v^3.3.5
+* @author KitchenJS
+* @link https://github.com/Kitchen-JS/clsselector
+**************************************/
+
+/**************************************
+* clsselector - A JavaScript Selector that handles json data
 * @version v3.0.3
-* @lastBuild Sat May 18 2024 15:40:26 GMT-0500 (Central Daylight Time)
+* @lastBuild Sun May 19 2024 15:32:39 GMT-0500 (Central Daylight Time)
 * TailWind: v^3.3.5
 * @author KitchenJS
 * @link https://github.com/Kitchen-JS/clsselector

@@ -14,6 +14,11 @@
 } */
 
 /* Theme form integration */
+.input-group:has(.clsSelector)
+{
+    @apply overflow-visible visible;
+    /* visibility: visible; */
+}
 .input-group .clsSelector
 {
     @apply h-full max-h-[100%] !important;
@@ -21,20 +26,9 @@
 
 .clsSelector
 {
-    /*Need responsive sizes*/
     @apply relative;
-    @apply block;
-    @apply overflow-hidden;
-
-    /* From Theme .input-group min-h-[3rem] + 1rem padding */
     @apply h-[4rem];
-    
     @apply max-w-[100%] w-[30rem] min-w-[10rem];
-    /* @apply max-w-[35rem] w-[30rem] min-w-[10rem]; */
-    /* Theme .flex-form flex breakpoints and columns */
-    /* @apply lg:min-w-[--clsSelector-lg-w] lg:max-w-[--clsSelector-lg-w] lg:w-[--clsSelector-lg-w];
-    @apply md:min-w-[--clsSelector-md-w] md:max-w-[--clsSelector-md-w] md:w-[--clsSelector-md-w];
-    @apply sm:min-w-[--clsSelector-sm-w] md:max-w-[--clsSelector-sm-w] md:w-[--clsSelector-sm-w]; */
 }
 
 .clsSelector .main-input
@@ -60,18 +54,18 @@
 /** Dropdown Div Start **/
 .clsSelector menu
 {
-    @apply fixed;
-    @apply border-0;
-    @apply z-9000;
+    @apply absolute w-full min-h-[300px] h-auto z-9999 overflow-y-visible visible;
+    transform: translate(0px, 0px);
+    /* visibility: visible; overflow: visible; min-height: 300px;  */
 
     width: inherit !important;
     min-width: inherit !important;
     max-width: inherit !important;
-    overflow: auto;
 }
 
 .clsSelector .dropdown-main-container
 {
+    /* @apply absolute; */
     @apply relative;
     @apply overflow-y-auto;
 
@@ -82,7 +76,8 @@
 
 .clsSelector .dropdown-inner-container
 {
-    /* @apply relative; */
+    /* @apply absolute; */
+    @apply relative;
     /* @apply ring-2 ring-gold rounded-md; */
 
     width: inherit !important;
@@ -93,6 +88,7 @@
 .clsSelector option.no-results
 {
     /* @apply relative; */
+    /* @apply absolute; */
     @apply z-9999;
     @apply p-2 bg-white;
     
@@ -104,6 +100,7 @@
 .clsSelector ul
 {
     /* @apply relative; */
+    /* @apply absolute; */
     @apply z-9999;
     @apply max-h-96 focus:outline-none;
     @apply list-none;

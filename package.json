@@ -1,7 +1,7 @@
 {
   "name": "clsselector",
   "description": "A JavaScript Selector that handles json data",
-  "version": "v3.0.3",
+  "version": "v3.0.4",
   "scripts": {
     "build": "tailwindcss -i ./tailwindInput/clsSelector.css -o ./www/content/css/clsSelector.css && node build.js",
     "build-run": "tailwindcss -i ./tailwindInput/clsSelector.css -o ./www/content/css/clsSelector.css --watch"

@@ -20,13 +20,41 @@
 
     <link rel="stylesheet" type="text/css" href="/content/css/clsSelector.css">
     <script src="/content/js/clsSelector.js"></script>
+
   </head>
   <body>
-    <div class="@container container">
 
-   
-      
-      
+    <div class="selectorA"></div>
+    <script>
+        let selectorA = new clsSelector(
+        {
+            containerElement: document.querySelector('.selectorA'),
+            minSearchLen: 0
+        });
+        //selectorA.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}], ['id','name',['name','phone','email']]); 
+        selectorA.addItems(['one', 'two', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three', 'three']);
+    </script>
+    <!-- clearfix -->
+    <!-- <div class="w-full h-11 bg-orange-500 clearfix"> 
+      <div class="relative w-full h-full">
+        <div class="w-full absolute h-80 bg-purple-500 z-9000" style="top: 40px; clear: both;"></div>
+      </div>
+    </div> -->
+<!-- 
+    <div class="flex-form">
+      <div class="input-group" style="">
+        <div class="clsSelector h-11 relative bg-orange-500 w-full"> 
+          <input class="peer" type="text" placeholder="Select">
+          <label class="input-label">Select</label>
+          <div class="absolute w-full min-h-full h-auto bg-purple-400 z-9999 overflow-y-auto" style="visibility: visible; overflow: visible; min-height: 300px; transform: translate(0px, 0px);">
+            FOO
+         </div>
+        </div>
+      </div>
+    </div>
+ -->
+
+    <div class="container @container">
         
       <div class="flex-form">
 
@@ -44,12 +72,220 @@
 
         <button class="val button btn">Get Value</button>
 
-        <div>
-          <div class="mySelector2 inline-block"></div> <button class="btn inline-block">Foo Button</button>
-        </div>
+   
         
         
       </div>
+
+      <div class="flex-form">
+        <div class="input-group">
+            <input class="peer" placeholder="igbuttons" type="text">
+            <label class="input-label">IG w/Buttons</label>
+            <button class="btn btn-yellow">Twist</button>
+            <button class="btn btn-red">Bop</button>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="igspan" type="text">
+            <label class="input-label">IG with span</label>
+            <span class="">A note</span>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="igtext" type="text" required>
+            <label class="input-label">Text Input Group</label>
+            <label class="validation-message">Required</label>
+        </div>
+        <div class="input-group">
+            <input class="peer NoteType validate email" placeholder="email" type="email">
+            <label class="input-label">Email</label>
+            <label class="validation-message">Email must end in .mil</label>
+        </div>
+        <div class="input-group">
+          <div class="selectorB"></div>
+          <script>
+              let selectorB = new clsSelector(
+              {
+                  containerElement: document.querySelector('.selectorB'),
+                  minSearchLen: 0
+              });
+              selectorB.addItems([{name:'one',id:1,email:'one@sample.com'}, {name:'two',id:2,email:'two@sample.com'}, {name:'three',id:3,email:'three@sample.com'}], ['id','name',['name','phone','email']]); 
+              // selectorA.addItems(['one', 'two', 'three']);
+          </script>
+        </div>
+        <div class="input-group">
+            <input class="peer NoteType validate phone" placeholder="tel" type="tel" required>
+            <label class="input-label">Tel</label>
+            <label class="validation-message">Must be ten digit phone.</label>
+        </div>
+        <div class="btn btn-link text-center align-middle">
+            <label class="">Button</label><input class="peer" placeholder="button" type="button">
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="Inline Color" type="text">
+            <label class="input-label">Inline Color</label>
+            <input class="max-w-25" placeholder="color" type="color">
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="Date" type="date">
+            <label class="input-label">Date</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="datetime-local" type="datetime-local">
+            <label class="input-label">datetime-local</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="file" type="file">
+            <label class="input-label">file</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="hidden" type="hidden">
+            <label class="input-label">hidden</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="image" type="image">
+            <label class="input-label">image</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="month" type="month">
+            <label class="input-label">month</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="password" type="password">
+            <label class="input-label">password</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="range" type="range">
+            <label class="input-label">range</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="reset" type="reset">
+            <label class="input-label">reset</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="search" type="search">
+            <label class="input-label">search</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="submit" type="submit">
+            <label class="input-label">submit</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="time" type="time">
+            <label class="input-label">time</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="url" type="url">
+            <label class="input-label">url</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="week" type="week">
+            <label class="input-label">week</label>
+        </div>
+        <div class="input-group">
+            <input class="peer" placeholder="color" type="color">
+            <label class="color">Color Label</label>
+        </div>
+        <div class="input-group">
+            <select>
+                <option selected>Select</option>
+                <option>Yo</option>
+                <option>Hello</option>
+                <option>Greetings</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <input class="peer" type="checkbox" placeholder="checkbox">
+            <label class="input-label">checkbox</label>
+        </div>
+        <div class="input-group">
+            <label class="checkbox-label">
+                Chequebox
+                <input class="peer pill" placeholder="Active" type="checkbox">
+                <span class="checkbox-span"></span>
+            </label>
+        </div>
+    </div>
+    <div class="flex flex-wrap flex-row gap-5 my-5">
+        <div class="checkbox-div">
+            <label class="checkbox-label">
+                Chequebox
+                <input class="peer" placeholder="Active" type="checkbox">
+                <span class="checkbox-span"></span>
+            </label>
+        </div>
+        <div class="checkbox-div">
+            <label class="checkbox-label">
+                Checkbox
+                <input class="peer" placeholder="Active" type="checkbox">
+                <span class="checkbox-span"></span>
+            </label>
+        </div>
+        <div class="checkbox-div">
+            <label class="checkbox-label">
+                Slider
+                <input class="peer" placeholder="Active" type="checkbox">
+                <span class="checkbox-span"></span>
+            </label>
+        </div>
+    </div>
+    <div class="flex flex-wrap gap-x-10 gap-y-3 mt-3">       
+        <div class="radio">
+            <label for="yes" class="radio-label">
+                Really long label
+                <input id="yes" type="radio" name="radiocheck" value="yes" class="peer" checked>
+                <span class="radio-span"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label for="no" class="radio-label">
+                No
+                <input id="no" type="radio" name="radiocheck" value="no" class="peer">
+                <span class="radio-span"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label for="maybe" class="radio-label">
+                Maybe
+                <input id="maybe" type="radio" name="radiocheck" value="maybe" class="peer">
+                <span class="radio-span"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label for="one" class="radio-label">
+                One
+                <input id="one" type="radio" name="radiocheck" value="one" class="peer" checked>
+                <span class="radio-span"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label for="two" class="radio-label">
+                Two
+                <input id="two" type="radio" name="radiocheck" value="two" class="peer">
+                <span class="radio-span"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label for="Three" class="radio-label">
+                Three
+                <input id="Three" type="radio" name="radiocheck" value="Three" class="peer">
+                <span class="radio-span"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label for="Four" class="radio-label">
+                Four
+                <input id="Four" type="radio" name="radiocheck" value="Four" class="peer">
+                <span class="radio-span"></span>
+            </label>
+        </div>
+        <div class="radio">
+            <label for="Five" class="radio-label">
+                Five
+                <input id="Five" type="radio" name="radiocheck" value="Five" class="peer">
+                <span class="radio-span"></span>
+            </label>
+        </div>
+    </div>
+
     </div>
     
     <script>

@@ -1,7 +1,17 @@
 /**************************************
 * clsselector - A JavaScript Selector that handles json data
+* @version v3.0.4
+* @lastBuild Sun May 19 2024 15:46:07 GMT-0500 (Central Daylight Time)
+* PEC T3-Tailwind-Theme Latest Version
+* TailWind: v^3.3.5
+* @author KitchenJS
+* @link https://github.com/Kitchen-JS/clsselector
+**************************************/
+
+/**************************************
+* clsselector - A JavaScript Selector that handles json data
 * @version v3.0.3
-* @lastBuild Sat May 18 2024 15:40:26 GMT-0500 (Central Daylight Time)
+* @lastBuild Sun May 19 2024 15:32:39 GMT-0500 (Central Daylight Time)
 * PEC T3-Tailwind-Theme Latest Version
 * TailWind: v^3.3.5
 * @author KitchenJS
@@ -25,6 +35,14 @@
 
 /* Theme form integration */
 
+.input-group:has(.clsSelector)
+{
+  visibility: visible;
+  overflow: visible;
+  /* visibility: visible; 
+    overflow: visible; */
+}
+
 .input-group .clsSelector
 {
   height: 100% !important;
@@ -35,8 +53,8 @@
 {
   /*Need responsive sizes*/
   position: relative;
-  display: block;
-  overflow: hidden;
+  /* @apply block;
+    @apply overflow-hidden; */
   /* From Theme .input-group min-h-[3rem] + 1rem padding */
   height: 4rem;
   width: 30rem;
@@ -97,17 +115,29 @@
 
 .clsSelector menu
 {
-  position: fixed;
-  border-width: 0px;
-  z-index: 9000;
+  visibility: visible;
+  position: absolute;
+  z-index: 9999;
+  height: auto;
+  min-height: 300px;
+  width: 100%;
+  overflow-y: visible;
+  transform: translate(0px, 0px);
+  /* visibility: visible; overflow: visible; min-height: 300px;  */
+  /* @apply fixed; */
+  /* @apply absolute;
+    @apply clear-both;
+    @apply border-0;
+    @apply z-9000;
+    @apply overflow-hidden; */
   width: inherit !important;
   min-width: inherit !important;
   max-width: inherit !important;
-  overflow: auto;
 }
 
 .clsSelector .dropdown-main-container
 {
+  /* @apply absolute; */
   position: relative;
   overflow-y: auto;
   width: inherit !important;
@@ -117,7 +147,8 @@
 
 .clsSelector .dropdown-inner-container
 {
-  /* @apply relative; */
+  /* @apply absolute; */
+  position: relative;
   /* @apply ring-2 ring-gold rounded-md; */
   width: inherit !important;
   min-width: inherit !important;
@@ -127,6 +158,7 @@
 .clsSelector option.no-results
 {
   /* @apply relative; */
+  /* @apply absolute; */
   z-index: 9999;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -139,6 +171,7 @@
 .clsSelector ul
 {
   /* @apply relative; */
+  /* @apply absolute; */
   z-index: 9999;
   max-height: 24rem;
 }
