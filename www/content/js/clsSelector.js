@@ -27,12 +27,7 @@ class clsSelector extends clsBaseClass
             console.error('clsSelector: containerElement must be defined');
         }
 
-        if (typeof this.options.placeHolder !== 'undefined')
-        {
-            this.options.placeholder = this.options.placeHolder;
-        }
-
-        if (typeof this.options.placeholder === 'undefined')
+        if (typeof this.options.placeholder === 'undefined' || !this.options.placeholder)
         {
             this.options.placeholder = 'Type to Search';
         }
@@ -78,8 +73,8 @@ class clsSelector extends clsBaseClass
 
         this.containerElement.innerHTML = `
             <div class="main-input">
-                <input class="selector-input peer" type="text" role="listbox" data-bs-toggle="dropdown" data-bs-target="#${id}" aria-expanded="false" aria-controls="menu" placeholder="Select an option . . . " />
-                <label for="selector-input" class="selector-heading input-label">Select an option . . . </label>
+                <input class="selector-input peer" type="text" role="listbox" data-bs-toggle="dropdown" data-bs-target="#${id}" aria-expanded="false" aria-controls="menu" placeholder="${this.options.placeholder} . . . " />
+                <label for="selector-input" class="selector-heading input-label">${this.options.placeholder} . . . </label>
                 <button aria-label="selector-refresh-button" role="button" class="selector-button btn btn-light refresh-button">
                     &#8635;
                 </button>

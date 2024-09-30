@@ -1,7 +1,7 @@
 /**************************************
 * clsselector - A JavaScript Selector that handles json data
 * @version v3.0.4
-* @lastBuild Sun May 19 2024 15:46:07 GMT-0500 (Central Daylight Time)
+* @lastBuild Mon Sep 02 2024 10:26:22 GMT-0500 (Central Daylight Time)
 * TailWind: v^3.3.5
 * @author KitchenJS
 * @link https://github.com/Kitchen-JS/clsselector
@@ -36,7 +36,7 @@ class clsSelector extends clsBaseClass
             console.error('clsSelector: containerElement must be defined');
         }
 
-        if (typeof this.options.placeHolder !== 'undefined')
+        if (typeof this.options.placeholder !== 'undefined')
         {
             this.options.placeholder = this.options.placeHolder;
         }
@@ -87,7 +87,7 @@ class clsSelector extends clsBaseClass
 
         this.containerElement.innerHTML = `
             <div class="main-input">
-                <input class="selector-input peer" type="text" role="listbox" data-bs-toggle="dropdown" data-bs-target="#${id}" aria-expanded="false" aria-controls="menu" placeholder="Select an option . . . " />
+                <input class="selector-input peer" type="text" role="listbox" data-bs-toggle="dropdown" data-bs-target="#${id}" aria-expanded="false" aria-controls="menu" placeholder="${this.options.placeholder} . . . " />
                 <label for="selector-input" class="selector-heading input-label">Select an option . . . </label>
                 <button aria-label="selector-refresh-button" role="button" class="selector-button btn btn-light refresh-button">
                     &#8635;
