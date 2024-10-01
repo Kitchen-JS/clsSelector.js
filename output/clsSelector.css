@@ -1,17 +1,7 @@
 /**************************************
 * clsselector - A JavaScript Selector that handles json data
 * @version v3.0.4
-* @lastBuild Mon Sep 02 2024 10:26:22 GMT-0500 (Central Daylight Time)
-* PEC T3-Tailwind-Theme Latest Version
-* TailWind: v^3.3.5
-* @author KitchenJS
-* @link https://github.com/Kitchen-JS/clsselector
-**************************************/
-
-/**************************************
-* clsselector - A JavaScript Selector that handles json data
-* @version v3.0.3
-* @lastBuild Sun May 19 2024 15:32:39 GMT-0500 (Central Daylight Time)
+* @lastBuild Mon Sep 30 2024 19:08:50 GMT-0500 (Central Daylight Time)
 * PEC T3-Tailwind-Theme Latest Version
 * TailWind: v^3.3.5
 * @author KitchenJS
@@ -25,13 +15,15 @@
   --clsSelector-sm-w: calc(400px / 1);
 }
 
-/* .dark .clsSelector
+.dark .clsSelector
 {
+  color: #000;
 }
 
 .lite .clsSelector
 {
-} */
+  color: #000;
+}
 
 /* Theme form integration */
 
@@ -194,4 +186,13 @@
 {
   width: 100%;
   white-space: pre-line;
+}
+
+.dark .clsSelector ul li
+{
+  color: #fff;
+}
+.lite .clsSelector ul li
+{
+  color: #000;
 }

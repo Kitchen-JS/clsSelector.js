@@ -1,9 +1,13 @@
 /**************************************
-* clsselector - A JavaScript Selector that handles json data
-* @version v3.0.3
-* @lastBuild Sun May 19 2024 15:32:39 GMT-0500 (Central Daylight Time)
-* TailWind: v^3.3.5
+* Temp workaround
+* bible-json - JSON Bible
+* @version 1.0.0
 * @author KitchenJS
+* @link https://github.com/Kitchen-JS/bible-json
+**************************************/
+
+/**************************************
+* clsselector - Modified version
 * @link https://github.com/Kitchen-JS/clsselector
 **************************************/
 
@@ -156,20 +160,23 @@ class clsSelector extends clsBaseClass
     cancel()
     {
         let changed = false;
-        if(this.value())
+        this.value((res) =>
         {
-            changed = true;
-        }
+            if(res)
+            {
+                changed = true;
+            }
 
-        this.selectorInput.value = '';
-        this.deselectItems();
-        this.showAllItems();
-        this.isListEmpty();
+            this.selectorInput.value = '';
+            this.deselectItems();
+            this.showAllItems();
+            this.isListEmpty();
 
-        if(changed)
-        {
-            this.onChange();
-        }
+            if(changed)
+            {
+                this.onChange();
+            }
+        });
     }
 
     refresh()
@@ -569,17 +576,19 @@ class clsSelector extends clsBaseClass
         this.containerElement.querySelector('ul').innerHTML = '';
     }
 
-    value()
+    value(callback)
     {
-        let val = null;
-        Array.from(this.containerElement.querySelector('ul').querySelectorAll('li')).filter((li) =>
+        setTimeout(() =>
         {
-            if(li.getAttribute('selected') === 'true')
+            if(this.containerElement.querySelector('ul li[selected=true]'))
             {
-                val = li.getAttribute('value');
+                callback(this.containerElement.querySelector('ul li[selected=true]').getAttribute('value'));
             }
-        });
-
-        return val;
+            else
+            {
+                callback(null);
+            }
+            
+        }, 500);
     }
 }

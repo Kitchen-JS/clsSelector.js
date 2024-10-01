@@ -1,23 +1,9 @@
 /**************************************
 * clsselector - A JavaScript Selector that handles json data
-* @version v3.0.4
-* @lastBuild Mon Sep 30 2024 19:08:50 GMT-0500 (Central Daylight Time)
+* @version v3.0.3
+* @lastBuild Sun May 19 2024 15:32:39 GMT-0500 (Central Daylight Time)
 * TailWind: v^3.3.5
 * @author KitchenJS
-* @link https://github.com/Kitchen-JS/clsselector
-**************************************/
-
-/**************************************
-* Temp workaround
-* bible-json - JSON Bible
-* @version 1.0.0
-* @lastBuild Sun Sep 08 2024 19:34:21 GMT-0500 (Central Daylight Time)
-* @author KitchenJS
-* @link https://github.com/Kitchen-JS/bible-json
-**************************************/
-
-/**************************************
-* clsselector - Modified version
 * @link https://github.com/Kitchen-JS/clsselector
 **************************************/
 
@@ -170,23 +156,20 @@ class clsSelector extends clsBaseClass
     cancel()
     {
         let changed = false;
-        this.value((res) =>
+        if(this.value())
         {
-            if(res)
-            {
-                changed = true;
-            }
+            changed = true;
+        }
 
-            this.selectorInput.value = '';
-            this.deselectItems();
-            this.showAllItems();
-            this.isListEmpty();
+        this.selectorInput.value = '';
+        this.deselectItems();
+        this.showAllItems();
+        this.isListEmpty();
 
-            if(changed)
-            {
-                this.onChange();
-            }
-        });
+        if(changed)
+        {
+            this.onChange();
+        }
     }
 
     refresh()
@@ -586,19 +569,17 @@ class clsSelector extends clsBaseClass
         this.containerElement.querySelector('ul').innerHTML = '';
     }
 
-    value(callback)
+    value()
     {
-        setTimeout(() =>
+        let val = null;
+        Array.from(this.containerElement.querySelector('ul').querySelectorAll('li')).filter((li) =>
         {
-            if(this.containerElement.querySelector('ul li[selected=true]'))
+            if(li.getAttribute('selected') === 'true')
             {
-                callback(this.containerElement.querySelector('ul li[selected=true]').getAttribute('value'));
+                val = li.getAttribute('value');
             }
-            else
-            {
-                callback(null);
-            }
-            
-        }, 500);
+        });
+
+        return val;
     }
 }

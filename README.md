@@ -169,6 +169,7 @@ or
 - npm i -g tailwindcss
 - npm install
 - npm update
+- npx playwright install-deps webkit
 
 ### Dependencies
 
