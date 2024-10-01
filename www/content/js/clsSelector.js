@@ -2,6 +2,7 @@
 * Temp workaround
 * bible-json - JSON Bible
 * @version 1.0.0
+* @lastBuild Sun Sep 08 2024 19:34:21 GMT-0500 (Central Daylight Time)
 * @author KitchenJS
 * @link https://github.com/Kitchen-JS/bible-json
 **************************************/
